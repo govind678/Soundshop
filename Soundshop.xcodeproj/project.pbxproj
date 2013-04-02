@@ -1,0 +1,325 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FC466FB31709750B00375B30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB21709750B00375B30 /* UIKit.framework */; };
+		FC466FB51709750B00375B30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB41709750B00375B30 /* Foundation.framework */; };
+		FC466FB71709750B00375B30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB61709750B00375B30 /* CoreGraphics.framework */; };
+		FC466FBD1709750B00375B30 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FC466FBB1709750B00375B30 /* InfoPlist.strings */; };
+		FC466FBF1709750B00375B30 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC466FBE1709750B00375B30 /* main.m */; };
+		FC466FC31709750B00375B30 /* SoundshopAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */; };
+		FC466FC51709750B00375B30 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC41709750B00375B30 /* Default.png */; };
+		FC466FC71709750B00375B30 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC61709750B00375B30 /* Default@2x.png */; };
+		FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC81709750B00375B30 /* Default-568h@2x.png */; };
+		FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC466FCB1709750B00375B30 /* SoundshopViewController.m */; };
+		FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC466FCD1709750B00375B30 /* SoundshopViewController.xib */; };
+		FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FD51709766E00375B30 /* AVFoundation.framework */; };
+		FC466FE017098A4200375B30 /* images in Resources */ = {isa = PBXBuildFile; fileRef = FC466FDF17098A4200375B30 /* images */; };
+		FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC950482170A5BF500FBA19A /* MediaPlayer.framework */; };
+		FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */; };
+		FC95048C170A5FDD00FBA19A /* viewWaveformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FC466FAE1709750B00375B30 /* Soundshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soundshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC466FB21709750B00375B30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FC466FB41709750B00375B30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FC466FB61709750B00375B30 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FC466FBA1709750B00375B30 /* Soundshop-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Soundshop-Info.plist"; sourceTree = "<group>"; };
+		FC466FBC1709750B00375B30 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FC466FBE1709750B00375B30 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FC466FC01709750B00375B30 /* Soundshop-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Soundshop-Prefix.pch"; sourceTree = "<group>"; };
+		FC466FC11709750B00375B30 /* SoundshopAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundshopAppDelegate.h; sourceTree = "<group>"; };
+		FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundshopAppDelegate.m; sourceTree = "<group>"; };
+		FC466FC41709750B00375B30 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		FC466FC61709750B00375B30 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		FC466FC81709750B00375B30 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		FC466FCA1709750B00375B30 /* SoundshopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundshopViewController.h; sourceTree = "<group>"; };
+		FC466FCB1709750B00375B30 /* SoundshopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundshopViewController.m; sourceTree = "<group>"; };
+		FC466FCE1709750B00375B30 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SoundshopViewController.xib; sourceTree = "<group>"; };
+		FC466FD51709766E00375B30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FC466FDF17098A4200375B30 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Soundshop/images; sourceTree = "<group>"; };
+		FC950482170A5BF500FBA19A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FC950488170A5FDD00FBA19A /* viewWaveformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewWaveformViewController.h; sourceTree = "<group>"; };
+		FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewWaveformViewController.m; sourceTree = "<group>"; };
+		FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewWaveformViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FC466FAB1709750B00375B30 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */,
+				FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */,
+				FC466FB31709750B00375B30 /* UIKit.framework in Frameworks */,
+				FC466FB51709750B00375B30 /* Foundation.framework in Frameworks */,
+				FC466FB71709750B00375B30 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FC466FA31709750B00375B30 = {
+			isa = PBXGroup;
+			children = (
+				FC466FDF17098A4200375B30 /* images */,
+				FC466FB81709750B00375B30 /* Soundshop */,
+				FC466FB11709750B00375B30 /* Frameworks */,
+				FC466FAF1709750B00375B30 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FC466FAF1709750B00375B30 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FC466FAE1709750B00375B30 /* Soundshop.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC466FB11709750B00375B30 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC950482170A5BF500FBA19A /* MediaPlayer.framework */,
+				FC466FD51709766E00375B30 /* AVFoundation.framework */,
+				FC466FB21709750B00375B30 /* UIKit.framework */,
+				FC466FB41709750B00375B30 /* Foundation.framework */,
+				FC466FB61709750B00375B30 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC466FB81709750B00375B30 /* Soundshop */ = {
+			isa = PBXGroup;
+			children = (
+				FC466FC11709750B00375B30 /* SoundshopAppDelegate.h */,
+				FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */,
+				FC466FCA1709750B00375B30 /* SoundshopViewController.h */,
+				FC466FCB1709750B00375B30 /* SoundshopViewController.m */,
+				FC466FCD1709750B00375B30 /* SoundshopViewController.xib */,
+				FC950488170A5FDD00FBA19A /* viewWaveformViewController.h */,
+				FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */,
+				FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */,
+				FC466FB91709750B00375B30 /* Supporting Files */,
+			);
+			path = Soundshop;
+			sourceTree = "<group>";
+		};
+		FC466FB91709750B00375B30 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC466FBA1709750B00375B30 /* Soundshop-Info.plist */,
+				FC466FBB1709750B00375B30 /* InfoPlist.strings */,
+				FC466FBE1709750B00375B30 /* main.m */,
+				FC466FC01709750B00375B30 /* Soundshop-Prefix.pch */,
+				FC466FC41709750B00375B30 /* Default.png */,
+				FC466FC61709750B00375B30 /* Default@2x.png */,
+				FC466FC81709750B00375B30 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FC466FAD1709750B00375B30 /* Soundshop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC466FD21709750B00375B30 /* Build configuration list for PBXNativeTarget "Soundshop" */;
+			buildPhases = (
+				FC466FAA1709750B00375B30 /* Sources */,
+				FC466FAB1709750B00375B30 /* Frameworks */,
+				FC466FAC1709750B00375B30 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Soundshop;
+			productName = Soundshop;
+			productReference = FC466FAE1709750B00375B30 /* Soundshop.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FC466FA51709750B00375B30 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = Soundshop;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = GTCMT;
+			};
+			buildConfigurationList = FC466FA81709750B00375B30 /* Build configuration list for PBXProject "Soundshop" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FC466FA31709750B00375B30;
+			productRefGroup = FC466FAF1709750B00375B30 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FC466FAD1709750B00375B30 /* Soundshop */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FC466FAC1709750B00375B30 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC466FBD1709750B00375B30 /* InfoPlist.strings in Resources */,
+				FC466FC51709750B00375B30 /* Default.png in Resources */,
+				FC466FC71709750B00375B30 /* Default@2x.png in Resources */,
+				FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */,
+				FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */,
+				FC466FE017098A4200375B30 /* images in Resources */,
+				FC95048C170A5FDD00FBA19A /* viewWaveformViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FC466FAA1709750B00375B30 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC466FBF1709750B00375B30 /* main.m in Sources */,
+				FC466FC31709750B00375B30 /* SoundshopAppDelegate.m in Sources */,
+				FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */,
+				FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FC466FBB1709750B00375B30 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC466FBC1709750B00375B30 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FC466FCD1709750B00375B30 /* SoundshopViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FC466FCE1709750B00375B30 /* en */,
+			);
+			name = SoundshopViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FC466FD01709750B00375B30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FC466FD11709750B00375B30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FC466FD31709750B00375B30 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Soundshop/Soundshop-Prefix.pch";
+				INFOPLIST_FILE = "Soundshop/Soundshop-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FC466FD41709750B00375B30 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Soundshop/Soundshop-Prefix.pch";
+				INFOPLIST_FILE = "Soundshop/Soundshop-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FC466FA81709750B00375B30 /* Build configuration list for PBXProject "Soundshop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC466FD01709750B00375B30 /* Debug */,
+				FC466FD11709750B00375B30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC466FD21709750B00375B30 /* Build configuration list for PBXNativeTarget "Soundshop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC466FD31709750B00375B30 /* Debug */,
+				FC466FD41709750B00375B30 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FC466FA51709750B00375B30 /* Project object */;
+}
