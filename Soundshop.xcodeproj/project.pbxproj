@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F03591C217149D5F00E4C0D9 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F03591C117149D5F00E4C0D9 /* Accelerate.framework */; };
-		F03CC7C917149E89008C9FA0 /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = F03CC7C817149E89008C9FA0 /* dsp.c */; };
+		F03CC7C917149E89008C9FA0 /* dsp.mm in Sources */ = {isa = PBXBuildFile; fileRef = F03CC7C817149E89008C9FA0 /* dsp.mm */; };
 		FC466FB31709750B00375B30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB21709750B00375B30 /* UIKit.framework */; };
 		FC466FB51709750B00375B30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB41709750B00375B30 /* Foundation.framework */; };
 		FC466FB71709750B00375B30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB61709750B00375B30 /* CoreGraphics.framework */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		F03591C117149D5F00E4C0D9 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
-		F03CC7C817149E89008C9FA0 /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsp.c; sourceTree = "<group>"; };
+		F03CC7C817149E89008C9FA0 /* dsp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = dsp.mm; sourceTree = "<group>"; };
 		F03CC7CA17160858008C9FA0 /* dsp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dsp.h; sourceTree = "<group>"; };
 		FC466FAE1709750B00375B30 /* Soundshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soundshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC466FB21709750B00375B30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -115,7 +115,7 @@
 				FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */,
 				FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */,
 				FC466FB91709750B00375B30 /* Supporting Files */,
-				F03CC7C817149E89008C9FA0 /* dsp.c */,
+				F03CC7C817149E89008C9FA0 /* dsp.mm */,
 				F03CC7CA17160858008C9FA0 /* dsp.h */,
 			);
 			path = Soundshop;
@@ -208,7 +208,7 @@
 				FC466FC31709750B00375B30 /* SoundshopAppDelegate.m in Sources */,
 				FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */,
 				FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */,
-				F03CC7C917149E89008C9FA0 /* dsp.c in Sources */,
+				F03CC7C917149E89008C9FA0 /* dsp.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
