@@ -7,8 +7,8 @@
 //
 
 #import "SoundshopViewController.h"
-#import <AVFoundation/AVFoundation.h>
 #import "viewWaveformViewController.h"
+
 
 @interface SoundshopViewController ()
 
@@ -16,7 +16,7 @@
 
 @implementation SoundshopViewController
 
-@synthesize playPauseButton, recordButton, audioPlayer, audioRecorder;
+@synthesize playPauseButton, recordButton, audioPlayer, audioRecorder, scrollWaveform;
 
 - (void)viewDidLoad
 {
@@ -27,6 +27,9 @@
     //audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
     //[audioPlayer setVolume:self.volumeSliderOutlet.value];
 
+    
+    
+    //*** Setup AV Recorded ***//
     
     NSError *error;
     
@@ -43,8 +46,7 @@
     NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
     
     NSDictionary *recordSettings = [NSDictionary
-                                    dictionaryWithObjectsAndKeys:
-                                    [NSNumber numberWithInt:AVAudioQualityMin],
+                                    dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:AVAudioQualityMin],
                                     AVEncoderAudioQualityKey,
                                     [NSNumber numberWithInt:16],
                                     AVEncoderBitRateKey,
@@ -68,13 +70,43 @@
     }
     
     
+    [scrollWaveform setContentSize:CGSizeMake(900, 600)];
+    
+    
+    //*** Setup Drawing Waveforms ***//
+    //waveformDrawObject = [[WaveformImageVew alloc] initWithUrl:soundFileURL];
+    
+    /*
+     AVURLAsset *songAsset = [AVURLAsset URLAssetWithURL:audioRecorder.url options:nil];
+
+    NSError *assetError = nil;
+	AVAssetReader *assetReader = [AVAssetReader assetReaderWithAsset:songAsset error:&assetError];
+	if (assetError) {
+		NSLog (@"error: %@", assetError);
+		return;
+	}
+    
+    AVAssetReaderOutput *assetReaderOutput = [AVAssetReaderAudioMixOutput
+                                              assetReaderAudioMixOutputWithAudioTracks:songAsset.tracks
+                                              audioSettings: nil];
+    
+    if (! [assetReader canAddOutput: assetReaderOutput]) {
+        NSLog (@"can't add reader output... die!");
+        return;
+    }
+    [assetReader addOutput: assetReaderOutput];*/
+    
 }
+
+
+
 
 - (void)updateMyProgress {
     float progress = [audioPlayer currentTime]/[audioPlayer duration];
     self.audioProgress.progress = progress;
     
 }
+
 
 
 - (IBAction)changeVolumeSlider:(UISlider *)sender {
@@ -111,17 +143,29 @@
         recordButton.title = @"Record";
         self.view.backgroundColor = [UIColor colorWithRed:0.09f green:0.282f blue:0.435f alpha:1.0f];
         
+        //*** Setup AV Audio Player ***//
         NSError *error;
-        
-        audioPlayer = [[AVAudioPlayer alloc]
-                       initWithContentsOfURL:audioRecorder.url
-                       error:&error];
-        
+        audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:audioRecorder.url error:&error];
         audioPlayer.delegate = self;
         
         NSLog(@"Stop Record");
+        
+        //UIImage *test123 = [UIImage imageNamed:@"../images/play.png"];
+        //UIImageView *test678 = [[UIImageView alloc] initWithImage:test123];
+        
+        //Call viewWaveformClass
+        //UIImageView *waveFormView = [[WaveformImageView alloc] initWithUrl:audioRecorder.url];
+        
+        //scrollWaveform = [[UIScrollView alloc] initWithFrame:waveFormView.frame];
+        
+        //NSLog(@"%@",waveFormView.animationImages);
+        //[scrollWaveform addSubview:waveFormView];
+        //[self.view addSubview:waveFormView];
+        
     }
 }
+
+
 
 - (IBAction)switchViewWaveform:(id)sender {
     viewWaveformViewController *viewWaveform = [[viewWaveformViewController alloc] initWithNibName:nil bundle:nil];
@@ -139,6 +183,8 @@
 }
 
 
+
+//*** AVPlayer/Recorder Delegate Methods ***//
 
 -(void)audioPlayerDidFinishPlaying: (AVAudioPlayer *)player successfully:(BOOL)flag {
     NSLog(@"Finished Playing");
@@ -164,5 +210,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end

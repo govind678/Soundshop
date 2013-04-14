@@ -8,8 +8,6 @@
 
 #import "viewWaveformViewController.h"
 
-#define imgExt @"png"
-#define imageToData(x) UIImagePNGRepresentation(x)
 
 @interface viewWaveformViewController ()
 

@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import "WaveformImageView.h"
 
 
 @interface SoundshopViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 {
     BOOL isPlaying;
     BOOL isRecording;
+    
+    WaveformImageView *drawWaveformObject;
 }
 
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
@@ -37,5 +41,6 @@
 - (IBAction)switchViewWaveform:(id)sender;
 
 
+@property (nonatomic, retain) IBOutlet UIScrollView *scrollWaveform;
 
 @end
