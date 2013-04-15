@@ -60,37 +60,6 @@
                       settings:recordSettings
                       error:&error];
     
-    /* random test code for myConv
-    
-    float *signal, *filter, *result;
-    uint32_t lenSignal, filterLength,resultLength;
-    uint32_t i;
-    
-    filterLength = 256;
-    resultLength = 2048;
-    lenSignal = ((filterLength + 3) & 0xFFFFFFFC) + resultLength;
-    
-    signal = (float*) malloc(lenSignal * sizeof(float));
-    filter = (float*) malloc(filterLength * sizeof(float));
-    result = (float*) malloc(resultLength * sizeof(float));
-    
-    if (signal == NULL || filter == NULL || result == NULL) {
-        printf("\nmalloc failed to allocate memory for the "
-               "convolution sample.\n");
-        exit(0);
-    }
-    
-    for (i = 0; i < lenSignal; i++)
-        signal[i] = 1.0;
-    
-    for (i = 0; i < filterLength; i++)
-        filter[i] = 1.0;
-    
-    result = myConv(signal, filter, lenSignal, filterLength, resultLength);
-                             
-    */
-    
-    
     if (error)
     {
         NSLog(@"error: %@", [error localizedDescription]);
@@ -98,12 +67,6 @@
         [audioRecorder prepareToRecord];
     }
     
-
-
-
-
-
-
     
 }
 
