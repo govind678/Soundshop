@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import <CoreAudio/CoreAudioTypes.h>
 #import "WaveformImageView.h"
+#include "dsp.h"
 
 
 @interface SoundshopViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -18,6 +20,14 @@
     BOOL isRecording;
     
     WaveformImageView *drawWaveformObject;
+    
+    AudioBufferList *audioBufferList;
+    
+    NSURL *soundFileURL;
+    
+    Float32 *floatAudioBuffer;
+    int bufferSize;
+    
 }
 
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
@@ -42,6 +52,11 @@
 
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollWaveform;
+
+
+static void CheckResult(OSStatus error, const char *operation);
+
+- (int)floatExtract;
 
 
 @end

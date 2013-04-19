@@ -22,13 +22,7 @@
 {
     [super viewDidLoad];
 	
-    //NSString *stringPath = [[NSBundle mainBundle]pathForResource:@"myAudio" ofType:@"mp3"];
-    //NSURL *url = [NSURL fileURLWithPath:stringPath];
-    //audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error];
-    //[audioPlayer setVolume:self.volumeSliderOutlet.value];
 
-    
-    
     //*** Setup AV Recorded ***//
     
     NSError *error;
@@ -43,7 +37,7 @@
     
     NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"sound.caf"];
     
-    NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
+    soundFileURL = [NSURL fileURLWithPath:soundFilePath];
     
     NSDictionary *recordSettings = [NSDictionary
                                     dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:AVAudioQualityMin],
@@ -61,6 +55,8 @@
                       initWithURL:soundFileURL
                       settings:recordSettings
                       error:&error];
+    
+    
     
     /* random test code for myConv
     
@@ -92,6 +88,7 @@
                              
     */
     
+
     
     if (error)
     {
@@ -100,10 +97,6 @@
         [audioRecorder prepareToRecord];
     }
     
-
-
-
-
 
 
     
@@ -132,6 +125,8 @@
         return;
     }
     [assetReader addOutput: assetReaderOutput];*/
+    
+    
     
 }
 
@@ -199,6 +194,9 @@
         //[scrollWaveform addSubview:waveFormView];
         //[self.view addSubview:waveFormView];
         
+        
+        [self floatExtract];
+        
     }
 }
 
@@ -221,6 +219,106 @@
 
 
 
+//*** Extended Audio File Services ***//
+- (int) floatExtract {
+    
+    //* (Float32) Audio Buffer: floatAudioBuffer
+    //* (int)Size of Buffer: bufferSize
+    
+    // Open Extended Audio File
+    CFURLRef inputFileURL = ((CFURLRef)CFBridgingRetain(soundFileURL));
+    ExtAudioFileRef fileRef;
+    CheckResult(ExtAudioFileOpenURL(inputFileURL, &fileRef), "ExtAudioFileOpenURL failed");
+    
+    
+    // Set up audio format
+	AudioStreamBasicDescription audioFormat;
+	audioFormat.mSampleRate = 44100;
+	audioFormat.mFormatID = kAudioFormatLinearPCM;
+	audioFormat.mFormatFlags = kLinearPCMFormatFlagIsFloat;
+	audioFormat.mBitsPerChannel = sizeof(Float32) * 8;
+	audioFormat.mChannelsPerFrame = 1; // set this to 2 for stereo
+	audioFormat.mBytesPerFrame = audioFormat.mChannelsPerFrame * sizeof(Float32);
+	audioFormat.mFramesPerPacket = 1;
+	audioFormat.mBytesPerPacket = audioFormat.mFramesPerPacket * audioFormat.mBytesPerFrame;
+    
+    
+    // Apply audio format to Extended Audio File
+	CheckResult(ExtAudioFileSetProperty(fileRef,
+                                        kExtAudioFileProperty_ClientDataFormat,
+                                        sizeof (AudioStreamBasicDescription),
+                                        &audioFormat),
+				"Couldn't set client data format on input ext file");
+    
+    
+    // Set up AudioBufferList
+	UInt32 outputBufferSize = 32 * 1024; // 32 KB
+	UInt32 sizePerPacket = audioFormat.mBytesPerPacket;
+	UInt32 packetsPerBuffer = outputBufferSize / sizePerPacket;
+	UInt8 *outputBuffer = (UInt8 *)malloc(sizeof(UInt8 *) * outputBufferSize);
+	AudioBufferList convertedData;
+	convertedData.mNumberBuffers = 1;
+	convertedData.mBuffers[0].mNumberChannels = audioFormat.mChannelsPerFrame;
+	convertedData.mBuffers[0].mDataByteSize = outputBufferSize;
+	convertedData.mBuffers[0].mData = outputBuffer;
+    
+	// Read Extended Audio File into AudioBufferList
+	UInt32 frameCount = packetsPerBuffer;
+	CheckResult(ExtAudioFileRead(fileRef,
+                                 &frameCount,
+                                 &convertedData),
+				"ExtAudioFileRead failed");
+	
+    
+	// Log float values of AudioBufferList
+	/*for( int y=0; y<convertedData.mNumberBuffers; y++ )
+	{
+		NSLog(@"buffer# %u", y);
+		AudioBuffer audioBuffer = convertedData.mBuffers[y];
+		bufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
+		floatAudioBuffer = audioBuffer.mData;
+		for( int i=0; i<bufferSize; i++ ) {
+			Float32 currentSample = floatAudioBuffer[i];
+			NSLog(@"currentSample: %f", currentSample);
+		}
+	}*/
+    
+    AudioBuffer audioBuffer = convertedData.mBuffers[0];
+    bufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
+    floatAudioBuffer = audioBuffer.mData;
+
+    
+    return 0;
+}
+
+
+
+
+static void CheckResult(OSStatus error, const char *operation)
+{
+	if (error == noErr) return;
+	char errorString[20];
+	// See if it appears to be a 4-char-code
+	*(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
+	if (isprint(errorString[1]) && isprint(errorString[2]) &&
+		isprint(errorString[3]) && isprint(errorString[4])) {
+		errorString[0] = errorString[5] = '\'';
+		errorString[6] = '\0';
+	} else
+		// No, format it as an integer
+		sprintf(errorString, "%d", (int)error);
+	
+	fprintf(stderr, "Error: %s (%s)\n", operation, errorString);
+	exit(1);
+}
+
+
+
+
+//*** Write result buffer to Audio File ***//
+
+
+
 //*** AVPlayer/Recorder Delegate Methods ***//
 
 -(void)audioPlayerDidFinishPlaying: (AVAudioPlayer *)player successfully:(BOOL)flag {
@@ -239,6 +337,7 @@
 -(void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
     NSLog(@"Encode Error occurred");
 }
+
 
 
 

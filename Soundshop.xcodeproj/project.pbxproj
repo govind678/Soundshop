@@ -26,6 +26,9 @@
 		FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */; };
 		FC95048C170A5FDD00FBA19A /* viewWaveformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */; };
 		FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */; };
+		FCFA993B1720DA25002F6DED /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FCFA99391720DA25002F6DED /* dsp.c */; };
+		FCFA993D1720DAF9002F6DED /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFA993C1720DAF9002F6DED /* Accelerate.framework */; };
+		FCFA993F1720DD85002F6DED /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFA993E1720DD85002F6DED /* CoreAudio.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,10 @@
 		FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewWaveformViewController.m; sourceTree = "<group>"; };
 		FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewWaveformViewController.xib; sourceTree = "<group>"; };
 		FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FCFA99391720DA25002F6DED /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsp.c; sourceTree = "<group>"; };
+		FCFA993A1720DA25002F6DED /* dsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsp.h; sourceTree = "<group>"; };
+		FCFA993C1720DAF9002F6DED /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FCFA993E1720DD85002F6DED /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCFA993F1720DD85002F6DED /* CoreAudio.framework in Frameworks */,
+				FCFA993D1720DAF9002F6DED /* Accelerate.framework in Frameworks */,
 				FC04EE03170E6F97000A2F61 /* CoreMedia.framework in Frameworks */,
 				FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */,
 				FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */,
@@ -96,6 +105,8 @@
 		FC466FB11709750B00375B30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCFA993E1720DD85002F6DED /* CoreAudio.framework */,
+				FCFA993C1720DAF9002F6DED /* Accelerate.framework */,
 				FC04EE02170E6F97000A2F61 /* CoreMedia.framework */,
 				FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */,
 				FC950482170A5BF500FBA19A /* MediaPlayer.framework */,
@@ -110,6 +121,8 @@
 		FC466FB81709750B00375B30 /* Soundshop */ = {
 			isa = PBXGroup;
 			children = (
+				FCFA99391720DA25002F6DED /* dsp.c */,
+				FCFA993A1720DA25002F6DED /* dsp.h */,
 				FC466FC11709750B00375B30 /* SoundshopAppDelegate.h */,
 				FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */,
 				FC466FCA1709750B00375B30 /* SoundshopViewController.h */,
@@ -213,6 +226,7 @@
 				FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */,
 				FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */,
 				FC04EE00170E6958000A2F61 /* WaveformImageView.m in Sources */,
+				FCFA993B1720DA25002F6DED /* dsp.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
