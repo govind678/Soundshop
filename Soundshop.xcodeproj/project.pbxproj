@@ -22,9 +22,11 @@
 		FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC466FCD1709750B00375B30 /* SoundshopViewController.xib */; };
 		FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FD51709766E00375B30 /* AVFoundation.framework */; };
 		FC466FE017098A4200375B30 /* images in Resources */ = {isa = PBXBuildFile; fileRef = FC466FDF17098A4200375B30 /* images */; };
+		FC6929991728C40900738211 /* Stairwell1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929981728C40900738211 /* Stairwell1.caf */; };
+		FC69299B1728F4A800738211 /* Hall1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC69299A1728F4A800738211 /* Hall1.caf */; };
+		FC69299F1728F8AA00738211 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC69299D1728F8AA00738211 /* FilterViewController.m */; };
+		FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69299E1728F8AA00738211 /* FilterViewController.xib */; };
 		FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC950482170A5BF500FBA19A /* MediaPlayer.framework */; };
-		FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */; };
-		FC95048C170A5FDD00FBA19A /* viewWaveformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */; };
 		FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */; };
 		FCFA993B1720DA25002F6DED /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FCFA99391720DA25002F6DED /* dsp.c */; };
 		FCFA993D1720DAF9002F6DED /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFA993C1720DAF9002F6DED /* Accelerate.framework */; };
@@ -53,10 +55,12 @@
 		FC466FCE1709750B00375B30 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SoundshopViewController.xib; sourceTree = "<group>"; };
 		FC466FD51709766E00375B30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FC466FDF17098A4200375B30 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Soundshop/images; sourceTree = "<group>"; };
+		FC6929981728C40900738211 /* Stairwell1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Stairwell1.caf; sourceTree = "<group>"; };
+		FC69299A1728F4A800738211 /* Hall1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hall1.caf; sourceTree = "<group>"; };
+		FC69299C1728F8AA00738211 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
+		FC69299D1728F8AA00738211 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
+		FC69299E1728F8AA00738211 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		FC950482170A5BF500FBA19A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
-		FC950488170A5FDD00FBA19A /* viewWaveformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = viewWaveformViewController.h; sourceTree = "<group>"; };
-		FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = viewWaveformViewController.m; sourceTree = "<group>"; };
-		FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = viewWaveformViewController.xib; sourceTree = "<group>"; };
 		FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FCFA99391720DA25002F6DED /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsp.c; sourceTree = "<group>"; };
 		FCFA993A1720DA25002F6DED /* dsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsp.h; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 		FC466FA31709750B00375B30 = {
 			isa = PBXGroup;
 			children = (
+				FC6929961728C3F800738211 /* IR */,
 				FC466FDF17098A4200375B30 /* images */,
 				FC466FB81709750B00375B30 /* Soundshop */,
 				FC466FB11709750B00375B30 /* Frameworks */,
@@ -125,12 +130,12 @@
 				FCFA993A1720DA25002F6DED /* dsp.h */,
 				FC466FC11709750B00375B30 /* SoundshopAppDelegate.h */,
 				FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */,
+				FC69299C1728F8AA00738211 /* FilterViewController.h */,
+				FC69299D1728F8AA00738211 /* FilterViewController.m */,
+				FC69299E1728F8AA00738211 /* FilterViewController.xib */,
 				FC466FCA1709750B00375B30 /* SoundshopViewController.h */,
 				FC466FCB1709750B00375B30 /* SoundshopViewController.m */,
 				FC466FCD1709750B00375B30 /* SoundshopViewController.xib */,
-				FC950488170A5FDD00FBA19A /* viewWaveformViewController.h */,
-				FC950489170A5FDD00FBA19A /* viewWaveformViewController.m */,
-				FC95048A170A5FDD00FBA19A /* viewWaveformViewController.xib */,
 				FC04EDFE170E6958000A2F61 /* WaveformImageView.h */,
 				FC04EDFF170E6958000A2F61 /* WaveformImageView.m */,
 				FC466FB91709750B00375B30 /* Supporting Files */,
@@ -150,6 +155,15 @@
 				FC466FC81709750B00375B30 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC6929961728C3F800738211 /* IR */ = {
+			isa = PBXGroup;
+			children = (
+				FC69299A1728F4A800738211 /* Hall1.caf */,
+				FC6929981728C40900738211 /* Stairwell1.caf */,
+			);
+			name = IR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,7 +224,9 @@
 				FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */,
 				FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */,
 				FC466FE017098A4200375B30 /* images in Resources */,
-				FC95048C170A5FDD00FBA19A /* viewWaveformViewController.xib in Resources */,
+				FC6929991728C40900738211 /* Stairwell1.caf in Resources */,
+				FC69299B1728F4A800738211 /* Hall1.caf in Resources */,
+				FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,9 +240,9 @@
 				FC466FBF1709750B00375B30 /* main.m in Sources */,
 				FC466FC31709750B00375B30 /* SoundshopAppDelegate.m in Sources */,
 				FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */,
-				FC95048B170A5FDD00FBA19A /* viewWaveformViewController.m in Sources */,
 				FC04EE00170E6958000A2F61 /* WaveformImageView.m in Sources */,
 				FCFA993B1720DA25002F6DED /* dsp.c in Sources */,
+				FC69299F1728F8AA00738211 /* FilterViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

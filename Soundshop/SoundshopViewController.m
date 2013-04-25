@@ -7,7 +7,7 @@
 //
 
 #import "SoundshopViewController.h"
-#import "viewWaveformViewController.h"
+#import "FilterViewController.h"
 
 
 @interface SoundshopViewController ()
@@ -203,8 +203,14 @@
 
 
 - (IBAction)switchViewWaveform:(id)sender {
-    viewWaveformViewController *viewWaveform = [[viewWaveformViewController alloc] initWithNibName:nil bundle:nil];
-    [self presentViewController:viewWaveform animated:YES completion:NO];
+    //viewWaveformViewController *viewWaveform = [[viewWaveformViewController alloc] initWithNibName:nil bundle:nil];
+    //[self presentViewController:viewWaveform animated:YES completion:NO];
+    
+    FilterViewController *viewFilterScreen = [[FilterViewController alloc] initWithNibName:nil bundle:nil];
+    viewFilterScreen.inputBuffer = floatAudioBuffer;
+    viewFilterScreen.inputBufferSize = bufferSize;
+    [self presentViewController:viewFilterScreen animated:YES completion:NO];
+    
 }
 
 
@@ -271,21 +277,21 @@
 	
     
 	// Log float values of AudioBufferList
-	/*for( int y=0; y<convertedData.mNumberBuffers; y++ )
+	for( int y=0; y<convertedData.mNumberBuffers; y++ )
 	{
 		NSLog(@"buffer# %u", y);
 		AudioBuffer audioBuffer = convertedData.mBuffers[y];
 		bufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
 		floatAudioBuffer = audioBuffer.mData;
-		for( int i=0; i<bufferSize; i++ ) {
+		/*for( int i=0; i<bufferSize; i++ ) {
 			Float32 currentSample = floatAudioBuffer[i];
 			NSLog(@"currentSample: %f", currentSample);
-		}
-	}*/
+		}*/
+	}
     
-    AudioBuffer audioBuffer = convertedData.mBuffers[0];
-    bufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
-    floatAudioBuffer = audioBuffer.mData;
+    //AudioBuffer audioBuffer = convertedData.mBuffers[0];
+    //bufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
+    //floatAudioBuffer = audioBuffer.mData;
 
     
     return 0;
