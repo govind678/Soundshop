@@ -22,10 +22,10 @@
 		FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC466FCD1709750B00375B30 /* SoundshopViewController.xib */; };
 		FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FD51709766E00375B30 /* AVFoundation.framework */; };
 		FC466FE017098A4200375B30 /* images in Resources */ = {isa = PBXBuildFile; fileRef = FC466FDF17098A4200375B30 /* images */; };
-		FC6929991728C40900738211 /* Stairwell1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929981728C40900738211 /* Stairwell1.caf */; };
-		FC69299B1728F4A800738211 /* Hall1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC69299A1728F4A800738211 /* Hall1.caf */; };
 		FC69299F1728F8AA00738211 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC69299D1728F8AA00738211 /* FilterViewController.m */; };
 		FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69299E1728F8AA00738211 /* FilterViewController.xib */; };
+		FC6929A317290BBB00738211 /* Hall1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929A117290BBB00738211 /* Hall1.caf */; };
+		FC6929A417290BBB00738211 /* Stairwell1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929A217290BBB00738211 /* Stairwell1.caf */; };
 		FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC950482170A5BF500FBA19A /* MediaPlayer.framework */; };
 		FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */; };
 		FCFA993B1720DA25002F6DED /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FCFA99391720DA25002F6DED /* dsp.c */; };
@@ -55,11 +55,11 @@
 		FC466FCE1709750B00375B30 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SoundshopViewController.xib; sourceTree = "<group>"; };
 		FC466FD51709766E00375B30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		FC466FDF17098A4200375B30 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Soundshop/images; sourceTree = "<group>"; };
-		FC6929981728C40900738211 /* Stairwell1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Stairwell1.caf; sourceTree = "<group>"; };
-		FC69299A1728F4A800738211 /* Hall1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hall1.caf; sourceTree = "<group>"; };
 		FC69299C1728F8AA00738211 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		FC69299D1728F8AA00738211 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		FC69299E1728F8AA00738211 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		FC6929A117290BBB00738211 /* Hall1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Hall1.caf; path = Soundshop/IR/Hall1.caf; sourceTree = "<group>"; };
+		FC6929A217290BBB00738211 /* Stairwell1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Stairwell1.caf; path = Soundshop/IR/Stairwell1.caf; sourceTree = "<group>"; };
 		FC950482170A5BF500FBA19A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FCFA99391720DA25002F6DED /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsp.c; sourceTree = "<group>"; };
@@ -160,8 +160,8 @@
 		FC6929961728C3F800738211 /* IR */ = {
 			isa = PBXGroup;
 			children = (
-				FC69299A1728F4A800738211 /* Hall1.caf */,
-				FC6929981728C40900738211 /* Stairwell1.caf */,
+				FC6929A117290BBB00738211 /* Hall1.caf */,
+				FC6929A217290BBB00738211 /* Stairwell1.caf */,
 			);
 			name = IR;
 			sourceTree = "<group>";
@@ -224,9 +224,9 @@
 				FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */,
 				FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */,
 				FC466FE017098A4200375B30 /* images in Resources */,
-				FC6929991728C40900738211 /* Stairwell1.caf in Resources */,
-				FC69299B1728F4A800738211 /* Hall1.caf in Resources */,
 				FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */,
+				FC6929A317290BBB00738211 /* Hall1.caf in Resources */,
+				FC6929A417290BBB00738211 /* Stairwell1.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
