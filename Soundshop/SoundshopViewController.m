@@ -60,13 +60,14 @@
     
     /* random test code for myConv
     
+    
     float *signal, *filter, *result;
     uint32_t lenSignal, filterLength,resultLength;
     uint32_t i;
     
     filterLength = 256;
-    resultLength = 2048;
-    lenSignal = ((filterLength + 3) & 0xFFFFFFFC) + resultLength;
+    lenSignal = 2048;
+    resultLength = lenSignal;
     
     signal = (float*) malloc(lenSignal * sizeof(float));
     filter = (float*) malloc(filterLength * sizeof(float));
@@ -196,6 +197,7 @@
         
         
         [self floatExtract];
+        
         
     }
 }

@@ -42,6 +42,7 @@
     // Create URLs from IR Files
     stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
     hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
+    
 
     
 }
@@ -106,12 +107,38 @@
 - (IBAction)applyReverb:(UIButton *)sender {
     
     // Convert IR to Float32 array (select appropriate NSURL)
-    Float32 *floatIRBuffer = [self floatExtract:stairwell1];
+    Float32 *floatIRBuffer = [self floatExtract:hall1];
     
+    /*
     for( int i=0; i<IRBufferSize; i++ ) {
         Float32 currentSample = floatIRBuffer[i];
         NSLog(@"currentSample: %f", currentSample);
     }
+    */
+    int32_t resultSize;
+
+    float* result;
+    
+    if(IRBufferSize > inputBufferSize)
+    {
+        resultSize = IRBufferSize;
+    }else
+    {
+        resultSize = inputBufferSize;
+    }
+    
+    printf("\nIRBufferSize = %i",IRBufferSize);
+    printf("\ninputBufferSize = %i", inputBufferSize);
+    result = malloc(sizeof(float)*resultSize);
+    
+    result = myConv(inputBuffer, floatIRBuffer, inputBufferSize, IRBufferSize, resultSize);
+    
+    int i;
+    for(i=0;i<inputBufferSize;i++)
+    {
+        printf("\ninputBuffer[%i] = %f",i,inputBuffer[i]);
+    }
+    
 }
 
 
