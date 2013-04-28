@@ -14,8 +14,11 @@
 #include <Accelerate/Accelerate.h>
 #include <stdint.h>
 
+
+
 float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterLength, uint32_t resultLength);
 COMPLEX_SPLIT* myFFT( float *signal, uint32_t lenSignal, uint32_t log2n );
 float* myIFFT( COMPLEX_SPLIT *signal, uint32_t lenSignal, uint32_t log2n);
+float* phoneFx( float* signal, int32_t lenSignal);
 
 #endif

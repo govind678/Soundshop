@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+
 #import <AudioToolbox/AudioToolbox.h>
 #import "EAFWrite.h"
 #import "EAFRead.h"
+
+#include "dsp.h"
+
 
 @interface FilterViewController : UIViewController <AVAudioPlayerDelegate> {
     
