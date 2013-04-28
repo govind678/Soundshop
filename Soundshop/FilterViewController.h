@@ -8,17 +8,30 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import "EAFWrite.h"
+#import "EAFRead.h"
 
-@interface FilterViewController : UIViewController {
+@interface FilterViewController : UIViewController <AVAudioPlayerDelegate> {
     
     AVAudioPlayer *resultAudioPlayer;
-    NSURL *resultFileURL;
+    NSURL *outURL;
     
     // IR File URLs
     NSURL *stairwell1;
     NSURL *hall1;
+    NSURL *bathroom1;
     
-    int IRBufferSize;
+    long stairwell1Duration;
+    long hall1Duration;
+    long bathroom1Duration;
+    
+    
+    EAFRead *reader;
+    EAFWrite *writer;
+    float **outBuffer;
+    float **IRBuffer;
+    long IRBufferSize;
     
 }
 
@@ -30,18 +43,24 @@
 
 - (IBAction)rewindResult:(UIBarButtonItem *)sender;
 
-- (IBAction)applyReverb:(UIButton *)sender;
-
 @property (weak, nonatomic) IBOutlet UIProgressView *resultProgress;
 
-- (Float32 *)floatExtract: (NSURL *)IRFile;
-static void CheckResult(OSStatus error, const char *operation);
+- (IBAction)process:(UIBarButtonItem *)sender;
+
+- (IBAction)applyStairwell:(UIButton *)sender;
+- (IBAction)applyHall:(UIButton *)sender;
+- (IBAction)applyBathroom:(UIButton *)sender;
+
 
 - (void)updatePlayProgress;
 
 
 @property (nonatomic) Float32* inputBuffer;
-@property (nonatomic) int inputBufferSize;
+@property (nonatomic) long inputBufferSize;
+@property (nonatomic) int channelCount;
+
+
+@property (strong, nonatomic) AVAudioPlayer *resultAudioPlayer;
 
 
 @end

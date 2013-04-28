@@ -1,23 +1,21 @@
 //
-//  FilterViewController.m
+//  viewWaveformViewController.m
 //  Soundshop
 //
-//  Created by Govinda Ram Pingali on 4/25/13.
+//  Created by Govinda Ram Pingali on 4/1/13.
 //  Copyright (c) 2013 GTCMT. All rights reserved.
 //
-//  Recorded Input Buffer: (Float32) inputBuffer
-//  Input Buffer Size: (int) inputBufferSize
+
+#import "viewWaveformViewController.h"
 
 
-#import "FilterViewController.h"
-
-@interface FilterViewController ()
+@interface viewWaveformViewController ()
 
 @end
 
-@implementation FilterViewController
+@implementation viewWaveformViewController
 
-@synthesize playPauseResultButton, resultProgress, inputBuffer, inputBufferSize;
+@synthesize playOutputButton;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -29,24 +27,15 @@
     return self;
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Do any additional setup after loading the view from its nib.
     
-    // Update Audio Progress
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updatePlayProgress) userInfo:nil repeats:YES];
-    
-    
-    // Create URLs from IR Files
-    stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
-    hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
+    //stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
+    //hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
 
-    
 }
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -55,71 +44,43 @@
 }
 
 
-//*** Return to Home Screen ***//
-- (IBAction)returnHome:(UIBarButtonItem *)sender {
+//--- Switch view to Home Screen ---//
+- (IBAction)switchHome:(id)sender {
     [self dismissViewControllerAnimated:YES completion:NO];
 }
 
 
-//*** Update Playback ProgressView ***//
-- (void)updatePlayProgress {
-    float progress = [resultAudioPlayer currentTime] / [resultAudioPlayer duration];
-    self.resultProgress.progress = progress;
-}
-
-
-
-//*** Play Result Audio File ***//
-- (IBAction)playResult:(UIBarButtonItem *)sender {
-    
-    NSError *error;
-	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:resultFileURL error:&error];
-    
-    if (resultAudioPlayer == nil) {
-		NSLog(@"%@",error);
-    } else {
-        if(!resultAudioPlayer.playing) {
-            [resultAudioPlayer play];
-            playPauseResultButton.title = @"Pause";
-            NSLog(@"Play");
-        } else {
-            [resultAudioPlayer pause];
-            playPauseResultButton.title = @"Play";
-            NSLog(@"Pause");
-        }
-    }
-}
-
-
-
-//*** Rewind Result Audio File ***//
-- (IBAction)rewindResult:(UIBarButtonItem *)sender {
-    
-    [resultAudioPlayer stop];
-    [resultAudioPlayer setCurrentTime:0];
-    playPauseResultButton.title = @"Play";
-}
-
-
-
-//*** Apply Reverb Effect ***//
+//--- Apply Reverb to Recorded File ---//
 - (IBAction)applyReverb:(UIButton *)sender {
     
-    // Convert IR to Float32 array (select appropriate NSURL)
-    Float32 *floatIRBuffer = [self floatExtract:stairwell1];
+    //Float32 floatIRBuffer = [self floatExtract:stairwell1];
     
-    for( int i=0; i<IRBufferSize; i++ ) {
-        Float32 currentSample = floatIRBuffer[i];
-        NSLog(@"currentSample: %f", currentSample);
-    }
+    //NSLog(@"IR Buffer: %f",floatIRBuffer);
+    
 }
+
+
+//--- Apply EQ to Recorded File ---//
+- (IBAction)applyEQ:(UIButton *)sender {
+}
+
+
+//--- Play Result ---//
+- (IBAction)playOutput:(UIBarButtonItem *)sender {
+}
+
+
+//--- Pause/Stop Result ---//
+- (IBAction)rewindOutput:(UIBarButtonItem *)sender {
+}
+
 
 
 
 
 
 //*** Extended Audio File Services ***//
-- (Float32 *)floatExtract: (NSURL *)IRFile {
+- (Float32)floatExtract: (NSURL *)IRFile {
     
     //* (Float32) Audio Buffer: floatAudioBuffer
     //* (int)Size of Buffer: bufferSize
@@ -169,18 +130,25 @@
 				"ExtAudioFileRead failed");
 	
     
-    Float32 *floatBuffer;
+    AudioBuffer audioBuffer = convertedData.mBuffers[0];
+    currentBufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
+    Float32 *floatBuffer = audioBuffer.mData;
+    
     
     // Log float values of AudioBufferList
-	for (int y=0; y<convertedData.mNumberBuffers; y++) {
+	/*for (int y=0; y<convertedData.mNumberBuffers; y++ )
+    {
         NSLog(@"buffer# %u", y);
         AudioBuffer audioBuffer = convertedData.mBuffers[y];
-        IRBufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
+        currentBufferSize = audioBuffer.mDataByteSize / sizeof(Float32);
         floatBuffer = audioBuffer.mData;
-     }
+        for( int i=0; i<currentBufferSize; i++ ) {
+            Float32 currentSample = floatBuffer[i];
+            NSLog(@"currentSample: %f", currentSample);
+        }
+    }*/
     
-    //NSLog(@"Float Extract: %f",*floatBuffer);
-    return (floatBuffer);
+    return *(floatBuffer);
 }
 
 
@@ -202,20 +170,6 @@ static void CheckResult(OSStatus error, const char *operation)
 	
 	fprintf(stderr, "Error: %s (%s)\n", operation, errorString);
 	exit(1);
-}
-
-
-
-
-//*** AVAudioPlayer Delegate Methods ***//
-
--(void)audioPlayerDidFinishPlaying: (AVAudioPlayer *)player successfully:(BOOL)flag {
-    NSLog(@"Finished Playing");
-    playPauseResultButton.title = @"Play";
-}
-
--(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    NSLog(@"Decode Error occurred");
 }
 
 

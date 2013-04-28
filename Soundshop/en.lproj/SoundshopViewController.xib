@@ -59,6 +59,7 @@
 						<string key="NSFrame">{{0, 276}, {568, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -84,8 +85,21 @@
 								<reference key="IBUIToolbar" ref="177018331"/>
 								<int key="IBUISystemItemIdentifier">19</int>
 							</object>
+							<object class="IBUIBarButtonItem" id="862396128">
+								<string key="IBUITitle">Equalizer</string>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="177018331"/>
+							</object>
 							<object class="IBUIBarButtonItem" id="561909683">
-								<string key="IBUITitle">Filters</string>
+								<string key="IBUITitle">Reverb</string>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<float key="IBUIWidth">71</float>
+								<int key="IBUIStyle">1</int>
+								<reference key="IBUIToolbar" ref="177018331"/>
+							</object>
+							<object class="IBUIBarButtonItem" id="114805804">
+								<string key="IBUITitle">Antiquing</string>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="177018331"/>
@@ -321,6 +335,14 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">217</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">switchEQView:</string>
+						<reference key="source" ref="862396128"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">274</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -641,17 +663,9 @@
 							<reference ref="391932946"/>
 							<reference ref="448139032"/>
 							<reference ref="561909683"/>
+							<reference ref="862396128"/>
+							<reference ref="114805804"/>
 						</array>
-						<reference key="parent" ref="774585933"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">122</int>
-						<reference key="object" ref="139430269"/>
-						<reference key="parent" ref="774585933"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">124</int>
-						<reference key="object" ref="284777865"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -805,11 +819,6 @@
 						<reference key="parent" ref="177018331"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">219</int>
-						<reference key="object" ref="660286711"/>
-						<reference key="parent" ref="774585933"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">222</int>
 						<reference key="object" ref="223064707"/>
 						<reference key="parent" ref="774585933"/>
@@ -859,6 +868,31 @@
 						<int key="objectID">248</int>
 						<reference key="object" ref="216306587"/>
 						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">269</int>
+						<reference key="object" ref="862396128"/>
+						<reference key="parent" ref="177018331"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">124</int>
+						<reference key="object" ref="284777865"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">219</int>
+						<reference key="object" ref="660286711"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">122</int>
+						<reference key="object" ref="139430269"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">275</int>
+						<reference key="object" ref="114805804"/>
+						<reference key="parent" ref="177018331"/>
 					</object>
 				</array>
 			</object>
@@ -912,6 +946,8 @@
 				<string key="248.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="249.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="250.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="269.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="275.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="6.IBViewMetadataConstraints">
 					<reference ref="354908978"/>
@@ -939,7 +975,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">268</int>
+			<int key="maxID">275</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -959,6 +995,7 @@
 						<string key="playPause:">UIBarButtonItem</string>
 						<string key="record:">UIBarButtonItem</string>
 						<string key="rewind:">UIBarButtonItem</string>
+						<string key="switchEQView:">UIBarButtonItem</string>
 						<string key="switchViewWaveform:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
@@ -976,6 +1013,10 @@
 						</object>
 						<object class="IBActionInfo" key="rewind:">
 							<string key="name">rewind:</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBActionInfo" key="switchEQView:">
+							<string key="name">switchEQView:</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBActionInfo" key="switchViewWaveform:">

@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AudioToolbox/AudioToolbox.h>
-#import <CoreAudio/CoreAudioTypes.h>
-#import "WaveformImageView.h"
 #include "dsp.h"
+#import "EAFRead.h"
+
 
 
 @interface SoundshopViewController : UIViewController <AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -19,14 +19,17 @@
     BOOL isPlaying;
     BOOL isRecording;
     
-    WaveformImageView *drawWaveformObject;
+    //WaveformImageView *drawWaveformObject;
     
     AudioBufferList *audioBufferList;
     
-    NSURL *soundFileURL;
+    EAFRead *reader;
+    float **inBuffer;
+    long numFrames;
+    int channelCount;
     
-    Float32 *floatAudioBuffer;
-    int bufferSize;
+    NSURL *stairwell1;
+    NSURL *hall1;
     
 }
 
@@ -50,13 +53,12 @@
 
 - (IBAction)switchViewWaveform:(id)sender;
 
+- (IBAction)switchEQView:(UIBarButtonItem *)sender;
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollWaveform;
 
 
-static void CheckResult(OSStatus error, const char *operation);
-
-- (int)floatExtract;
+@property (readonly) EAFRead *reader;
 
 
 @end

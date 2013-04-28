@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC04EE00170E6958000A2F61 /* WaveformImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC04EDFF170E6958000A2F61 /* WaveformImageView.m */; };
-		FC04EE03170E6F97000A2F61 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC04EE02170E6F97000A2F61 /* CoreMedia.framework */; };
 		FC466FB31709750B00375B30 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB21709750B00375B30 /* UIKit.framework */; };
 		FC466FB51709750B00375B30 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB41709750B00375B30 /* Foundation.framework */; };
 		FC466FB71709750B00375B30 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FB61709750B00375B30 /* CoreGraphics.framework */; };
@@ -18,15 +16,28 @@
 		FC466FC51709750B00375B30 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC41709750B00375B30 /* Default.png */; };
 		FC466FC71709750B00375B30 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC61709750B00375B30 /* Default@2x.png */; };
 		FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC466FC81709750B00375B30 /* Default-568h@2x.png */; };
-		FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC466FCB1709750B00375B30 /* SoundshopViewController.m */; };
+		FC466FCC1709750B00375B30 /* SoundshopViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC466FCB1709750B00375B30 /* SoundshopViewController.mm */; };
 		FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC466FCD1709750B00375B30 /* SoundshopViewController.xib */; };
 		FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC466FD51709766E00375B30 /* AVFoundation.framework */; };
-		FC466FE017098A4200375B30 /* images in Resources */ = {isa = PBXBuildFile; fileRef = FC466FDF17098A4200375B30 /* images */; };
-		FC69299F1728F8AA00738211 /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC69299D1728F8AA00738211 /* FilterViewController.m */; };
 		FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69299E1728F8AA00738211 /* FilterViewController.xib */; };
 		FC6929A317290BBB00738211 /* Hall1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929A117290BBB00738211 /* Hall1.caf */; };
 		FC6929A417290BBB00738211 /* Stairwell1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FC6929A217290BBB00738211 /* Stairwell1.caf */; };
-		FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC950482170A5BF500FBA19A /* MediaPlayer.framework */; };
+		FCC7E5CB172CEC5A00518972 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC7E5CA172CEC5A00518972 /* MediaPlayer.framework */; };
+		FCC7E5CE172CEC6900518972 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC7E5CD172CEC6900518972 /* CoreMedia.framework */; };
+		FCC7E5E7172CF40100518972 /* libDIRAC_iOS-fat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC7E5E6172CF40100518972 /* libDIRAC_iOS-fat.a */; };
+		FCC7E5EC172CF4A200518972 /* EAFRead.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCC7E5E9172CF4A200518972 /* EAFRead.mm */; };
+		FCC7E5ED172CF4A200518972 /* EAFWrite.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCC7E5EB172CF4A200518972 /* EAFWrite.mm */; };
+		FCC7E5F0172CF4B800518972 /* Utilities.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCC7E5EF172CF4B800518972 /* Utilities.mm */; };
+		FCC7E5F2172D09AE00518972 /* FilterViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCC7E5F1172D09AD00518972 /* FilterViewController.mm */; };
+		FCC7E5F6172D226D00518972 /* EQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7E5F4172D226D00518972 /* EQViewController.m */; };
+		FCC7E5F7172D226D00518972 /* EQViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5F5172D226D00518972 /* EQViewController.xib */; };
+		FCC7E5F9172D2A8300518972 /* Bathroom1.caf in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5F8172D2A8300518972 /* Bathroom1.caf */; };
+		FCC7E601172D30AC00518972 /* bathroom.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5FB172D30AC00518972 /* bathroom.png */; };
+		FCC7E602172D30AC00518972 /* hall.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5FC172D30AC00518972 /* hall.png */; };
+		FCC7E603172D30AD00518972 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5FD172D30AC00518972 /* pause.png */; };
+		FCC7E604172D30AD00518972 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5FE172D30AC00518972 /* play.png */; };
+		FCC7E605172D30AD00518972 /* stariwell in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E5FF172D30AC00518972 /* stariwell */; };
+		FCC7E606172D30AD00518972 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC7E600172D30AC00518972 /* stop.png */; };
 		FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */; };
 		FCFA993B1720DA25002F6DED /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = FCFA99391720DA25002F6DED /* dsp.c */; };
 		FCFA993D1720DAF9002F6DED /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCFA993C1720DAF9002F6DED /* Accelerate.framework */; };
@@ -34,9 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FC04EDFE170E6958000A2F61 /* WaveformImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveformImageView.h; sourceTree = "<group>"; };
-		FC04EDFF170E6958000A2F61 /* WaveformImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveformImageView.m; sourceTree = "<group>"; };
-		FC04EE02170E6F97000A2F61 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		FC466FAE1709750B00375B30 /* Soundshop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soundshop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC466FB21709750B00375B30 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FC466FB41709750B00375B30 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -51,16 +59,34 @@
 		FC466FC61709750B00375B30 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		FC466FC81709750B00375B30 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FC466FCA1709750B00375B30 /* SoundshopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SoundshopViewController.h; sourceTree = "<group>"; };
-		FC466FCB1709750B00375B30 /* SoundshopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoundshopViewController.m; sourceTree = "<group>"; };
+		FC466FCB1709750B00375B30 /* SoundshopViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = SoundshopViewController.mm; sourceTree = "<group>"; };
 		FC466FCE1709750B00375B30 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SoundshopViewController.xib; sourceTree = "<group>"; };
 		FC466FD51709766E00375B30 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		FC466FDF17098A4200375B30 /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; name = images; path = Soundshop/images; sourceTree = "<group>"; };
 		FC69299C1728F8AA00738211 /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
-		FC69299D1728F8AA00738211 /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		FC69299E1728F8AA00738211 /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
 		FC6929A117290BBB00738211 /* Hall1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Hall1.caf; path = Soundshop/IR/Hall1.caf; sourceTree = "<group>"; };
 		FC6929A217290BBB00738211 /* Stairwell1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Stairwell1.caf; path = Soundshop/IR/Stairwell1.caf; sourceTree = "<group>"; };
-		FC950482170A5BF500FBA19A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FCC7E5CA172CEC5A00518972 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FCC7E5CD172CEC6900518972 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FCC7E5E5172CF40100518972 /* Dirac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dirac.h; path = ../Dirac.h; sourceTree = "<group>"; };
+		FCC7E5E6172CF40100518972 /* libDIRAC_iOS-fat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libDIRAC_iOS-fat.a"; sourceTree = "<group>"; };
+		FCC7E5E8172CF4A200518972 /* EAFRead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAFRead.h; path = ExtAudioFile/EAFRead.h; sourceTree = "<group>"; };
+		FCC7E5E9172CF4A200518972 /* EAFRead.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EAFRead.mm; path = ExtAudioFile/EAFRead.mm; sourceTree = "<group>"; };
+		FCC7E5EA172CF4A200518972 /* EAFWrite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EAFWrite.h; path = ExtAudioFile/EAFWrite.h; sourceTree = "<group>"; };
+		FCC7E5EB172CF4A200518972 /* EAFWrite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = EAFWrite.mm; path = ExtAudioFile/EAFWrite.mm; sourceTree = "<group>"; };
+		FCC7E5EE172CF4B800518972 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Utilities.h; path = utils/Utilities.h; sourceTree = "<group>"; };
+		FCC7E5EF172CF4B800518972 /* Utilities.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Utilities.mm; path = utils/Utilities.mm; sourceTree = "<group>"; };
+		FCC7E5F1172D09AD00518972 /* FilterViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FilterViewController.mm; sourceTree = "<group>"; };
+		FCC7E5F3172D226D00518972 /* EQViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EQViewController.h; sourceTree = "<group>"; };
+		FCC7E5F4172D226D00518972 /* EQViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EQViewController.m; sourceTree = "<group>"; };
+		FCC7E5F5172D226D00518972 /* EQViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EQViewController.xib; sourceTree = "<group>"; };
+		FCC7E5F8172D2A8300518972 /* Bathroom1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Bathroom1.caf; path = Soundshop/IR/Bathroom1.caf; sourceTree = "<group>"; };
+		FCC7E5FB172D30AC00518972 /* bathroom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bathroom.png; path = Soundshop/images/bathroom.png; sourceTree = "<group>"; };
+		FCC7E5FC172D30AC00518972 /* hall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hall.png; path = Soundshop/images/hall.png; sourceTree = "<group>"; };
+		FCC7E5FD172D30AC00518972 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pause.png; path = Soundshop/images/pause.png; sourceTree = "<group>"; };
+		FCC7E5FE172D30AC00518972 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = play.png; path = Soundshop/images/play.png; sourceTree = "<group>"; };
+		FCC7E5FF172D30AC00518972 /* stariwell */ = {isa = PBXFileReference; lastKnownFileType = file; name = stariwell; path = Soundshop/images/stariwell; sourceTree = "<group>"; };
+		FCC7E600172D30AC00518972 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = stop.png; path = Soundshop/images/stop.png; sourceTree = "<group>"; };
 		FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		FCFA99391720DA25002F6DED /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = dsp.c; sourceTree = "<group>"; };
 		FCFA993A1720DA25002F6DED /* dsp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dsp.h; sourceTree = "<group>"; };
@@ -73,15 +99,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC7E5CE172CEC6900518972 /* CoreMedia.framework in Frameworks */,
+				FCC7E5CB172CEC5A00518972 /* MediaPlayer.framework in Frameworks */,
 				FCFA993F1720DD85002F6DED /* CoreAudio.framework in Frameworks */,
 				FCFA993D1720DAF9002F6DED /* Accelerate.framework in Frameworks */,
-				FC04EE03170E6F97000A2F61 /* CoreMedia.framework in Frameworks */,
 				FCDE9AC6170ABE4F00B7D223 /* AudioToolbox.framework in Frameworks */,
-				FC950483170A5BF500FBA19A /* MediaPlayer.framework in Frameworks */,
 				FC466FD61709766E00375B30 /* AVFoundation.framework in Frameworks */,
 				FC466FB31709750B00375B30 /* UIKit.framework in Frameworks */,
 				FC466FB51709750B00375B30 /* Foundation.framework in Frameworks */,
 				FC466FB71709750B00375B30 /* CoreGraphics.framework in Frameworks */,
+				FCC7E5E7172CF40100518972 /* libDIRAC_iOS-fat.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,8 +118,8 @@
 		FC466FA31709750B00375B30 = {
 			isa = PBXGroup;
 			children = (
+				FCC7E5FA172D309300518972 /* images */,
 				FC6929961728C3F800738211 /* IR */,
-				FC466FDF17098A4200375B30 /* images */,
 				FC466FB81709750B00375B30 /* Soundshop */,
 				FC466FB11709750B00375B30 /* Frameworks */,
 				FC466FAF1709750B00375B30 /* Products */,
@@ -110,11 +137,12 @@
 		FC466FB11709750B00375B30 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCC7E5E6172CF40100518972 /* libDIRAC_iOS-fat.a */,
+				FCC7E5CD172CEC6900518972 /* CoreMedia.framework */,
+				FCC7E5CA172CEC5A00518972 /* MediaPlayer.framework */,
 				FCFA993E1720DD85002F6DED /* CoreAudio.framework */,
 				FCFA993C1720DAF9002F6DED /* Accelerate.framework */,
-				FC04EE02170E6F97000A2F61 /* CoreMedia.framework */,
 				FCDE9AC5170ABE4F00B7D223 /* AudioToolbox.framework */,
-				FC950482170A5BF500FBA19A /* MediaPlayer.framework */,
 				FC466FD51709766E00375B30 /* AVFoundation.framework */,
 				FC466FB21709750B00375B30 /* UIKit.framework */,
 				FC466FB41709750B00375B30 /* Foundation.framework */,
@@ -126,18 +154,21 @@
 		FC466FB81709750B00375B30 /* Soundshop */ = {
 			isa = PBXGroup;
 			children = (
+				FCC7E5E1172CF3B000518972 /* util */,
+				FCC7E5DA172CF35600518972 /* ExtAudioFile */,
 				FCFA99391720DA25002F6DED /* dsp.c */,
 				FCFA993A1720DA25002F6DED /* dsp.h */,
 				FC466FC11709750B00375B30 /* SoundshopAppDelegate.h */,
 				FC466FC21709750B00375B30 /* SoundshopAppDelegate.m */,
 				FC69299C1728F8AA00738211 /* FilterViewController.h */,
-				FC69299D1728F8AA00738211 /* FilterViewController.m */,
+				FCC7E5F1172D09AD00518972 /* FilterViewController.mm */,
 				FC69299E1728F8AA00738211 /* FilterViewController.xib */,
 				FC466FCA1709750B00375B30 /* SoundshopViewController.h */,
-				FC466FCB1709750B00375B30 /* SoundshopViewController.m */,
+				FC466FCB1709750B00375B30 /* SoundshopViewController.mm */,
 				FC466FCD1709750B00375B30 /* SoundshopViewController.xib */,
-				FC04EDFE170E6958000A2F61 /* WaveformImageView.h */,
-				FC04EDFF170E6958000A2F61 /* WaveformImageView.m */,
+				FCC7E5F3172D226D00518972 /* EQViewController.h */,
+				FCC7E5F4172D226D00518972 /* EQViewController.m */,
+				FCC7E5F5172D226D00518972 /* EQViewController.xib */,
 				FC466FB91709750B00375B30 /* Supporting Files */,
 			);
 			path = Soundshop;
@@ -146,6 +177,7 @@
 		FC466FB91709750B00375B30 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FCC7E5E5172CF40100518972 /* Dirac.h */,
 				FC466FBA1709750B00375B30 /* Soundshop-Info.plist */,
 				FC466FBB1709750B00375B30 /* InfoPlist.strings */,
 				FC466FBE1709750B00375B30 /* main.m */,
@@ -160,10 +192,44 @@
 		FC6929961728C3F800738211 /* IR */ = {
 			isa = PBXGroup;
 			children = (
+				FCC7E5F8172D2A8300518972 /* Bathroom1.caf */,
 				FC6929A117290BBB00738211 /* Hall1.caf */,
 				FC6929A217290BBB00738211 /* Stairwell1.caf */,
 			);
 			name = IR;
+			sourceTree = "<group>";
+		};
+		FCC7E5DA172CF35600518972 /* ExtAudioFile */ = {
+			isa = PBXGroup;
+			children = (
+				FCC7E5E8172CF4A200518972 /* EAFRead.h */,
+				FCC7E5E9172CF4A200518972 /* EAFRead.mm */,
+				FCC7E5EA172CF4A200518972 /* EAFWrite.h */,
+				FCC7E5EB172CF4A200518972 /* EAFWrite.mm */,
+			);
+			name = ExtAudioFile;
+			sourceTree = "<group>";
+		};
+		FCC7E5E1172CF3B000518972 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				FCC7E5EE172CF4B800518972 /* Utilities.h */,
+				FCC7E5EF172CF4B800518972 /* Utilities.mm */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		FCC7E5FA172D309300518972 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				FCC7E5FB172D30AC00518972 /* bathroom.png */,
+				FCC7E5FC172D30AC00518972 /* hall.png */,
+				FCC7E5FD172D30AC00518972 /* pause.png */,
+				FCC7E5FE172D30AC00518972 /* play.png */,
+				FCC7E5FF172D30AC00518972 /* stariwell */,
+				FCC7E600172D30AC00518972 /* stop.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,10 +289,17 @@
 				FC466FC71709750B00375B30 /* Default@2x.png in Resources */,
 				FC466FC91709750B00375B30 /* Default-568h@2x.png in Resources */,
 				FC466FCF1709750B00375B30 /* SoundshopViewController.xib in Resources */,
-				FC466FE017098A4200375B30 /* images in Resources */,
 				FC6929A01728F8AA00738211 /* FilterViewController.xib in Resources */,
 				FC6929A317290BBB00738211 /* Hall1.caf in Resources */,
 				FC6929A417290BBB00738211 /* Stairwell1.caf in Resources */,
+				FCC7E5F7172D226D00518972 /* EQViewController.xib in Resources */,
+				FCC7E5F9172D2A8300518972 /* Bathroom1.caf in Resources */,
+				FCC7E601172D30AC00518972 /* bathroom.png in Resources */,
+				FCC7E602172D30AC00518972 /* hall.png in Resources */,
+				FCC7E603172D30AD00518972 /* pause.png in Resources */,
+				FCC7E604172D30AD00518972 /* play.png in Resources */,
+				FCC7E605172D30AD00518972 /* stariwell in Resources */,
+				FCC7E606172D30AD00518972 /* stop.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,10 +312,13 @@
 			files = (
 				FC466FBF1709750B00375B30 /* main.m in Sources */,
 				FC466FC31709750B00375B30 /* SoundshopAppDelegate.m in Sources */,
-				FC466FCC1709750B00375B30 /* SoundshopViewController.m in Sources */,
-				FC04EE00170E6958000A2F61 /* WaveformImageView.m in Sources */,
+				FC466FCC1709750B00375B30 /* SoundshopViewController.mm in Sources */,
 				FCFA993B1720DA25002F6DED /* dsp.c in Sources */,
-				FC69299F1728F8AA00738211 /* FilterViewController.m in Sources */,
+				FCC7E5EC172CF4A200518972 /* EAFRead.mm in Sources */,
+				FCC7E5ED172CF4A200518972 /* EAFWrite.mm in Sources */,
+				FCC7E5F0172CF4B800518972 /* Utilities.mm in Sources */,
+				FCC7E5F2172D09AE00518972 /* FilterViewController.mm in Sources */,
+				FCC7E5F6172D226D00518972 /* EQViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,8 +399,17 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Soundshop/Soundshop-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Soundshop/Soundshop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Soundshop/ExtAudioFile\"",
+					"\"$(SRCROOT)/../../../../../../Downloads/--DIRAC3LE--/Dirac3-Mobile/Common Files/src\"",
+					"\"$(SRCROOT)/Soundshop\"",
+					"\"$(SRCROOT)\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -335,8 +420,16 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Soundshop/Soundshop-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "Soundshop/Soundshop-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Soundshop/ExtAudioFile\"",
+					"\"$(SRCROOT)/../../../../../../Downloads/--DIRAC3LE--/Dirac3-Mobile/Common Files/src\"",
+					"\"$(SRCROOT)/Soundshop\"",
+					"\"$(SRCROOT)\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
