@@ -175,6 +175,56 @@
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
     [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
+     
+    
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    
+
+    uint32_t outBufferSize;
+    float *result;
+    float *input, *filter;
+    
+    
+    input = (float*)malloc(inputBufferSize*sizeof(float));
+    filter = (float*)malloc(IRBufferSize*sizeof(float));
+    for(int i = 0;i < inputBufferSize;i++)
+    {
+        input[i] = 1.0;
+    }
+    for(int i = 0; i < IRBufferSize; i++)
+    {
+        filter[i] = 1.0;
+    }
+    
+
+    outBufferSize = IRBufferSize+inputBufferSize-1;
+    result = (float*) malloc(outBufferSize*sizeof(float));
+    
+    
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    
+    //for(int i = 0; i<IRBufferSize;i++)
+    //{
+    //    printf("\ninputBuffer[%i] = %f",i,inputBuffer[i]);
+    //}
+    float *temp = &IRBuffer[0][0];
+    
+    result = myConv2(inputBuffer, temp, inputBufferSize, IRBufferSize, outBufferSize);
+    outBuffer = &result;
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
+    
+    
+    
+    
     
     
     /*//Log IR Buffer

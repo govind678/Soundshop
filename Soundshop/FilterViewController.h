@@ -60,7 +60,7 @@
 
 
 @property (nonatomic) Float32* inputBuffer;
-@property (nonatomic) long inputBufferSize;
+@property (nonatomic) uint32_t inputBufferSize;
 @property (nonatomic) int channelCount;
 
 

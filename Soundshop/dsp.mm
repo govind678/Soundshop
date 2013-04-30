@@ -13,6 +13,7 @@ float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterL
 {
     float       *result;
     int32_t     signalStride, filterStride, resultStride;
+    lenSignal = ((filterLength + 3) & 0xFFFFFFFC) + resultLength;
     
     signalStride = resultStride = 1;
     filterStride = -1;
@@ -36,7 +37,13 @@ float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterL
     //for(i=0;i<resultLength;i++)
     //    printf("\nresult[%i]: %f",i,result[i]);
     
-    return result;
+    //scale ouput from -1 to 1;
+    float max;
+    vDSP_maxmgv(result,1,&max,resultLength);
+    vDSP_vsdiv(result,1,&max,result,1,resultLength);
+    
+    
+    return &result[0];
     
     
 }
@@ -214,3 +221,86 @@ float* phoneFx( float* signal, int32_t lenSignal)
     return result;
     
 }
+
+
+
+float* bqFilter(float *signal, int32_t lenSignal, float *coefs)
+{
+    
+    // first 3 coefficients are 'b' which determine zeros (numerator)
+    // and last 2 coeffs are 'a' which determine poles
+    
+    float *result;
+    
+    result = (float*)malloc(lenSignal*sizeof(float));
+    
+    //initialize first two elements
+    result[0] = 0;
+    result[1] = 0;
+    
+    
+    vDSP_deq22(signal, 1, coefs, result, 1, lenSignal-2);
+    return result;
+    
+    
+}
+
+float* cryBaby(float *signal, int32_t lenSignal, float pedalValue, float gainDM)
+{
+    float *result;
+    result = (float*) malloc(lenSignal*sizeof(float));
+    
+    float PI = 3.14159;
+    float g = 0.1*(pow((double)gainDM, (double)pedalValue));
+    float fr = 450*pow(2, 2.3*pedalValue);
+    float Q = pow(2,2*(1-pedalValue)+1);
+    
+    float frn = fr/44100;
+    float R = 1-PI*frn/Q;
+    float theta = 2*PI*frn;
+    float a[5];
+    a[0] = 1;
+    a[1] = 0;
+    a[2] = 0;
+    a[3] = -2.0*R*cos(theta);
+    a[4] = R*R;
+    result = bqFilter(signal, lenSignal, a);
+    vDSP_vsmul(result, 1, &g, result, 1, lenSignal);
+    return result;
+    
+}
+
+float* myConv2(float *signal, float *filter, int lenSignal, int lenFilter, int lenResult)
+{
+    int i,j;
+    float *y;
+    
+    y = (float*) malloc(lenResult*sizeof(float));
+    
+    for ( i = 0; i < lenSignal; i++ )
+    {
+        y[i] = 0;                       // set to zero before sum
+        for ( j = 0; j < lenFilter; j++ )
+        {
+            if(i-j > 0)
+            {
+                y[i] += signal[i - j] * filter[j];    // convolve: multiply and accumulate
+            }
+        }
+    }
+    
+    float max;
+    vDSP_maxmgv(y,1,&max,lenResult);
+    vDSP_vsdiv(y,1,&max,y,1,lenResult);
+    
+    for(int i = 0; i < lenResult; i++)
+        printf("\ny[%i] = %f",i,y[i]);
+    
+    return y;
+    
+    
+}
+
+
+
+
