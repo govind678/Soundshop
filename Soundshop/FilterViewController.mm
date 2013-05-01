@@ -182,22 +182,10 @@
 
     uint32_t outBufferSize;
     float *result;
-    float *input, *filter;
     
     
-    input = (float*)malloc(inputBufferSize*sizeof(float));
-    filter = (float*)malloc(IRBufferSize*sizeof(float));
-    for(int i = 0;i < inputBufferSize;i++)
-    {
-        input[i] = 1.0;
-    }
-    for(int i = 0; i < IRBufferSize; i++)
-    {
-        filter[i] = 1.0;
-    }
+    outBufferSize = inputBufferSize+IRBufferSize-1;
     
-
-    outBufferSize = IRBufferSize+inputBufferSize-1;
     result = (float*) malloc(outBufferSize*sizeof(float));
     
     
@@ -206,25 +194,41 @@
         outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
     }
     
-    //for(int i = 0; i<IRBufferSize;i++)
-    //{
-    //    printf("\ninputBuffer[%i] = %f",i,inputBuffer[i]);
-    //}
     float *temp = &IRBuffer[0][0];
+    //float inp[6] = {0,1,2,3,4,5,};
+   // float filt[6] = {0,1,2,3,4,5};
+    //float res[11];
+    //float *resPtr;
+    //float *sig, *filt, *res;
+    //sig = (float*) malloc(1000*sizeof(float));
+    //filt = (float*) malloc(1000*sizeof(float));
+    //res = (float*) malloc(1999*sizeof(float));
+    //for(int i=0; i< 1000; i++)
+    //{
+     //   sig[i] = i;
+     //   filt[i] = i;
+    //}
     
-    result = myConv2(inputBuffer, temp, inputBufferSize, IRBufferSize, outBufferSize);
+    //res = myConv2(temp,sig,IRBufferSize,1000,1000+IRBufferSize-1);
+    
+
+    if(IRBufferSize > inputBufferSize)
+    {
+        result = myConv2(temp, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+    }else
+    {
+        result = myConv2(inputBuffer, temp, inputBufferSize, IRBufferSize, outBufferSize);
+    }
+
     outBuffer = &result;
+    [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
     
     [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
     NSError *error;
 	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
     resultAudioPlayer.delegate = self;
     NSLog(@"%@",error.description);
-    
-    
-    
-    
-    
     
     
     /*//Log IR Buffer

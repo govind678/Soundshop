@@ -43,7 +43,7 @@ float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterL
     vDSP_vsdiv(result,1,&max,result,1,resultLength);
     
     
-    return &result[0];
+    return result;
     
     
 }
@@ -274,29 +274,51 @@ float* myConv2(float *signal, float *filter, int lenSignal, int lenFilter, int l
 {
     int i,j;
     float *y;
+    //float factor = 1000.0;
+    //vDSP_vsmul(signal,1,&factor,signal,1,lenSignal);
+    //vDSP_vsmul(filter,1,&factor,filter,1,lenFilter);
+    
+    for(int i = 0; i < lenSignal; i++)
+        printf("\nsignal[%i] = %f",i,signal[i]);
+    
+    for(int i = 0; i < lenFilter; i++)
+        printf("\nfilter[%i] = %f",i,filter[i]);
     
     y = (float*) malloc(lenResult*sizeof(float));
     
-    for ( i = 0; i < lenSignal; i++ )
+    for ( i = 0; i < lenResult; i++ )
     {
         y[i] = 0;                       // set to zero before sum
         for ( j = 0; j < lenFilter; j++ )
         {
-            if(i-j > 0)
+            
+            if(i >= lenSignal )
+            {
+                if(j+(i-lenSignal) < lenFilter)
+                {
+                    y[i] += signal[lenSignal-1-j]*filter[j+(i-lenSignal+1)];
+                    
+                }
+                
+            }else if(i-j >= 0)
             {
                 y[i] += signal[i - j] * filter[j];    // convolve: multiply and accumulate
+                
             }
         }
     }
     
-    float max;
-    vDSP_maxmgv(y,1,&max,lenResult);
-    vDSP_vsdiv(y,1,&max,y,1,lenResult);
     
+    //float max;
+    //vDSP_maxmgv(y,1,&max,lenResult);
+    //vDSP_vsdiv(y,1,&max,y,1,lenResult);
     for(int i = 0; i < lenResult; i++)
-        printf("\ny[%i] = %f",i,y[i]);
+        printf("\ny[%i] = %.99g",i,y[i]);
+    
+    
     
     return y;
+  
     
     
 }
