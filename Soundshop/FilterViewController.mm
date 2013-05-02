@@ -23,8 +23,14 @@
 @implementation FilterViewController
 
 @synthesize playPauseResultButton, resultProgress, inputBuffer, inputBufferSize, channelCount;
-@synthesize resultAudioPlayer;
+@synthesize resultAudioPlayer, reverbParam;
 
+
+
+/**************************************
+To use reverb slider, use:
+    reverbParam.value
+***************************************/
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -163,6 +169,7 @@
 //*** Reverb Implementations ***//
 
 - (IBAction)applyStairwell:(UIButton *)sender {
+    
     
     // Setup ExtAudioFile Reader
     float duration = stairwell1Duration;
@@ -389,6 +396,12 @@
     
     
 
+}
+
+- (IBAction)applyDecay:(UIButton *)sender {
+}
+
+- (IBAction)applySquareWave:(UIButton *)sender {
 }
 
 

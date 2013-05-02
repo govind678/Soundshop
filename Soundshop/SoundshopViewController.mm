@@ -10,6 +10,7 @@
 #import "SoundshopViewController.h"
 #import "FilterViewController.h"
 #import "EQViewController.h"
+#import "AntiqueViewController.h"
 #import "EAFRead.h"
 
 #define SampleRate 44100.0
@@ -210,24 +211,38 @@
 - (IBAction)switchViewWaveform:(id)sender {
     //viewWaveformViewController *viewWaveform = [[viewWaveformViewController alloc] initWithNibName:nil bundle:nil];
     //[self presentViewController:viewWaveform animated:YES completion:NO];
+    if(audioPlayer != nil) {
+        FilterViewController *viewFilterScreen = [[FilterViewController alloc] initWithNibName:nil bundle:nil];
+        viewFilterScreen.inputBuffer = *(inBuffer);
+        viewFilterScreen.inputBufferSize = numFrames;
+        viewFilterScreen.channelCount = channelCount;
+        [self presentViewController:viewFilterScreen animated:YES completion:NO];
+    }
     
-    FilterViewController *viewFilterScreen = [[FilterViewController alloc] initWithNibName:nil bundle:nil];
-    viewFilterScreen.inputBuffer = *(inBuffer);
-    viewFilterScreen.inputBufferSize = numFrames;
-    viewFilterScreen.channelCount = channelCount;
-    [self presentViewController:viewFilterScreen animated:YES completion:NO];
+    
+}
+
+- (IBAction)switchAntique:(UIBarButtonItem *)sender {
+    if(audioPlayer != nil) {
+        AntiqueViewController *viewAntiqueScreen = [[AntiqueViewController alloc] initWithNibName:nil bundle:nil];
+        viewAntiqueScreen.inputBuffer = *(inBuffer);
+        viewAntiqueScreen.inputBufferSize = numFrames;
+        viewAntiqueScreen.channelCount = channelCount;
+        [self presentViewController:viewAntiqueScreen animated:YES completion:NO];
+    }
+
     
 }
 
 
 - (IBAction)switchEQView:(UIBarButtonItem *)sender {
-    
-    EQViewController *viewEQScreen = [[EQViewController alloc]initWithNibName:nil bundle:nil];
-    viewEQScreen.inputBuffer = *(inBuffer);
-    viewEQScreen.inputBufferSize = numFrames;
-    viewEQScreen.channelCount = channelCount;
-    [self presentViewController:viewEQScreen animated:YES completion:NO];
-    
+    if(audioPlayer != nil) {
+        EQViewController *viewEQScreen = [[EQViewController alloc]initWithNibName:nil bundle:nil];
+        viewEQScreen.inputBuffer = *(inBuffer);
+        viewEQScreen.inputBufferSize = numFrames;
+        viewEQScreen.channelCount = channelCount;
+        [self presentViewController:viewEQScreen animated:YES completion:NO];
+    }
     
 }
 

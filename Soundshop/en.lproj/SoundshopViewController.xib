@@ -59,7 +59,6 @@
 						<string key="NSFrame">{{0, 276}, {568, 44}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -343,6 +342,14 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">274</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">switchAntique:</string>
+						<reference key="source" ref="114805804"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">276</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -975,7 +982,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">275</int>
+			<int key="maxID">276</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -995,6 +1002,7 @@
 						<string key="playPause:">UIBarButtonItem</string>
 						<string key="record:">UIBarButtonItem</string>
 						<string key="rewind:">UIBarButtonItem</string>
+						<string key="switchAntique:">UIBarButtonItem</string>
 						<string key="switchEQView:">UIBarButtonItem</string>
 						<string key="switchViewWaveform:">id</string>
 					</dictionary>
@@ -1013,6 +1021,10 @@
 						</object>
 						<object class="IBActionInfo" key="rewind:">
 							<string key="name">rewind:</string>
+							<string key="candidateClassName">UIBarButtonItem</string>
+						</object>
+						<object class="IBActionInfo" key="switchAntique:">
+							<string key="name">switchAntique:</string>
 							<string key="candidateClassName">UIBarButtonItem</string>
 						</object>
 						<object class="IBActionInfo" key="switchEQView:">

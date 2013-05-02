@@ -55,6 +55,10 @@
 - (IBAction)applyHall:(UIButton *)sender;
 - (IBAction)applyBathroom:(UIButton *)sender;
 
+- (IBAction)applyDecay:(UIButton *)sender;
+- (IBAction)applySquareWave:(UIButton *)sender;
+
+
 
 - (void)updatePlayProgress;
 
@@ -62,6 +66,9 @@
 @property (nonatomic) Float32* inputBuffer;
 @property (nonatomic) uint32_t inputBufferSize;
 @property (nonatomic) int channelCount;
+
+
+@property (weak, nonatomic) IBOutlet UISlider *reverbParam;
 
 
 @property (strong, nonatomic) AVAudioPlayer *resultAudioPlayer;

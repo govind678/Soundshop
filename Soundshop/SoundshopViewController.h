@@ -52,7 +52,7 @@
 - (IBAction)record:(UIBarButtonItem *)sender;
 
 - (IBAction)switchViewWaveform:(id)sender;
-
+- (IBAction)switchAntique:(UIBarButtonItem *)sender;
 - (IBAction)switchEQView:(UIBarButtonItem *)sender;
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollWaveform;
