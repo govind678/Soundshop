@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "EAFWrite.h"
+#include "dsp.h"
 
 
 @interface AntiqueViewController : UIViewController <AVAudioPlayerDelegate> {

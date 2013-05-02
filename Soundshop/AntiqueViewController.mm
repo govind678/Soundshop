@@ -9,6 +9,8 @@
 #import "AntiqueViewController.h"
 #import "EAFWrite.h"
 
+#define SampleRate 44100
+
 @interface AntiqueViewController ()
 
 @end
@@ -55,6 +57,27 @@
 }
 
 - (IBAction)applyPhone:(UIButton *)sender {
+    
+    //code for phoneFx
+    float *result;
+    result = (float*) malloc(inputBufferSize*sizeof(float));
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    int outBufferSize = inputBufferSize+200;
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    result = phoneFx(inputBuffer, inputBufferSize);
+    outBuffer = &result;
+    [writer openFileForWrite:antiqueURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:antiqueURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
 }
 
 - (IBAction)applyVinyl:(UIButton *)sender {
