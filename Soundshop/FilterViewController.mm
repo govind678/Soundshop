@@ -78,6 +78,7 @@ To use reverb slider, use:
     // Setup ExtAudioFile Writer & Reader
     writer = [[EAFWrite alloc]init];
     reader = [[EAFRead alloc]init];
+    sqWaveFlag = 0;
     
     
     // Log Input Buffer
@@ -187,59 +188,99 @@ To use reverb slider, use:
     
     //perform convolution Reverb
     outBuffer = (float**) calloc(channelCount, sizeof(float));
-    
-
+    float *result;
     uint32_t outBufferSize;
-    float *temp = &IRBuffer[0][0];
     
-    float *result, *tt, *bk1, *env, *bk2;
-    
-    tt = (float*) malloc(IRBufferSize*sizeof(float));
-    for(int i = 1; i<=IRBufferSize; i++)
+    if(sqWaveFlag == 0)
     {
-        tt[i] = i;                              //tt=1:1:length(bk);
-    }
+        
+        float *temp = &IRBuffer[0][0];
     
-    int n = 6;
-    float m = reverbParam.value;
-    printf("\nm = %f\n",m);
+        float *tt, *bk1, *env, *bk2;
     
-    float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
-    bk1 = (float*) malloc((int)delay*sizeof(float));
+        tt = (float*) malloc(IRBufferSize*sizeof(float));
+        for(int i = 1; i<=IRBufferSize; i++)
+        {
+            tt[i] = i;                              //tt=1:1:length(bk);
+        }
     
-    for(int i = 0; i < (int)delay; i++)
-    {
-        bk1[i] = temp[i];                   //bk1 = bk(1:delay);
-    }
+        int n = 6;
+        float m = reverbParam.value;
+        printf("\nm = %f\n",m);
     
-    env = (float*) malloc(IRBufferSize*sizeof(float));
+        float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
+        bk1 = (float*) malloc((int)delay*sizeof(float));
     
-    for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
-    {                                       //env = env (1:delay);
-        env[i] = exp(-n*tt[i]/delay);
-    }
-    bk2 = (float*) malloc((int)delay*sizeof(float));
-    vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
-    bk2[0]=0;
+        for(int i = 0; i < (int)delay; i++)
+        {
+            bk1[i] = temp[i];                   //bk1 = bk(1:delay);
+        }
     
-    outBufferSize = inputBufferSize + (int)delay -1;
+        env = (float*) malloc(IRBufferSize*sizeof(float));
     
-    result = (float*) malloc(outBufferSize*sizeof(float));
+        for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
+        {                                       //env = env (1:delay);
+            env[i] = exp(-n*tt[i]/delay);
+        }
+        bk2 = (float*) malloc((int)delay*sizeof(float));
+        vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
+        bk2[0]=0;
+    
+        outBufferSize = inputBufferSize + (int)delay -1;
+    
+        result = (float*) malloc(outBufferSize*sizeof(float));
     
     
-    for (int i = 0;i<channelCount;i++)
-    {
-        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
-    }
+        for (int i = 0;i<channelCount;i++)
+        {
+            outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+        }
     
     
 
-    if((int)delay > inputBufferSize)
-    {
-        result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
+        if((int)delay > inputBufferSize)
+        {
+            result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
+        }else
+        {
+            result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
+        }
     }else
     {
-        result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
+        float *temp = &IRBuffer[0][0];
+        
+        float *bkSq, *sqEnv;
+        
+        sqEnv = (float*) malloc(IRBufferSize*sizeof(float));
+        bkSq = (float*) calloc(IRBufferSize, sizeof(float));
+        
+        sqEnv = square(IRBufferSize,1);
+        
+        vDSP_vmul(temp,1,sqEnv,1,bkSq,1,IRBufferSize);
+        
+        
+        outBufferSize = inputBufferSize + IRBufferSize - 1;
+        
+        result = (float*) malloc(outBufferSize*sizeof(float));
+        
+        
+        for (int i = 0;i<channelCount;i++)
+        {
+            outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+        }
+        
+        
+        
+        if(IRBufferSize > inputBufferSize)
+        {
+            result = myConv2(bkSq, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+        }else
+        {
+            result = myConv2(inputBuffer, bkSq, inputBufferSize, IRBufferSize, outBufferSize);
+        }
+        
+        
+        
     }
 
     outBuffer = &result;
@@ -275,59 +316,99 @@ To use reverb slider, use:
     
     //perform convolution Reverb
     outBuffer = (float**) calloc(channelCount, sizeof(float));
-    
-    
+    float *result;
     uint32_t outBufferSize;
-    float *temp = &IRBuffer[0][0];
     
-    float *result, *tt, *bk1, *env, *bk2;
-    
-    tt = (float*) malloc(IRBufferSize*sizeof(float));
-    for(int i = 1; i<=IRBufferSize; i++)
+    if(sqWaveFlag == 0)
     {
-        tt[i] = i;                              //tt=1:1:length(bk);
-    }
-    
-    int n = 6;
-    float m = reverbParam.value;
-    printf("\nm = %f\n",m);
-    
-    float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
-    bk1 = (float*) malloc((int)delay*sizeof(float));
-    
-    for(int i = 0; i < (int)delay; i++)
-    {
-        bk1[i] = temp[i];                   //bk1 = bk(1:delay);
-    }
-    
-    env = (float*) malloc(IRBufferSize*sizeof(float));
-    
-    for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
-    {                                       //env = env (1:delay);
-        env[i] = exp(-n*tt[i]/delay);
-    }
-    bk2 = (float*) malloc((int)delay*sizeof(float));
-    vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
-    bk2[0]=0;
-    
-    outBufferSize = inputBufferSize + (int)delay -1;
-    
-    result = (float*) malloc(outBufferSize*sizeof(float));
-    
-    
-    for (int i = 0;i<channelCount;i++)
-    {
-        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
-    }
-    
-    
-    
-    if((int)delay > inputBufferSize)
-    {
-        result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
+        
+        float *temp = &IRBuffer[0][0];
+        
+        float *tt, *bk1, *env, *bk2;
+        
+        tt = (float*) malloc(IRBufferSize*sizeof(float));
+        for(int i = 1; i<=IRBufferSize; i++)
+        {
+            tt[i] = i;                              //tt=1:1:length(bk);
+        }
+        
+        int n = 6;
+        float m = reverbParam.value;
+        printf("\nm = %f\n",m);
+        
+        float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
+        bk1 = (float*) malloc((int)delay*sizeof(float));
+        
+        for(int i = 0; i < (int)delay; i++)
+        {
+            bk1[i] = temp[i];                   //bk1 = bk(1:delay);
+        }
+        
+        env = (float*) malloc(IRBufferSize*sizeof(float));
+        
+        for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
+        {                                       //env = env (1:delay);
+            env[i] = exp(-n*tt[i]/delay);
+        }
+        bk2 = (float*) malloc((int)delay*sizeof(float));
+        vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
+        bk2[0]=0;
+        
+        outBufferSize = inputBufferSize + (int)delay -1;
+        
+        result = (float*) malloc(outBufferSize*sizeof(float));
+        
+        
+        for (int i = 0;i<channelCount;i++)
+        {
+            outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+        }
+        
+        
+        
+        if((int)delay > inputBufferSize)
+        {
+            result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
+        }else
+        {
+            result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
+        }
     }else
     {
-        result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
+        float *temp = &IRBuffer[0][0];
+        
+        float *bkSq, *sqEnv;
+        
+        sqEnv = (float*) malloc(IRBufferSize*sizeof(float));
+        bkSq = (float*) calloc(IRBufferSize, sizeof(float));
+        
+        sqEnv = square(IRBufferSize,1);
+        
+        vDSP_vmul(temp,1,sqEnv,1,bkSq,1,IRBufferSize);
+        
+        
+        outBufferSize = inputBufferSize + IRBufferSize - 1;
+        
+        result = (float*) malloc(outBufferSize*sizeof(float));
+        
+        
+        for (int i = 0;i<channelCount;i++)
+        {
+            outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+        }
+        
+        
+        
+        if(IRBufferSize > inputBufferSize)
+        {
+            result = myConv2(bkSq, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+        }else
+        {
+            result = myConv2(inputBuffer, bkSq, inputBufferSize, IRBufferSize, outBufferSize);
+        }
+        
+        
+        
     }
     
     outBuffer = &result;
@@ -342,8 +423,7 @@ To use reverb slider, use:
     
     //free(outBuffer);
     free(IRBuffer);
-    free(result);
-}
+    free(result);}
 
 
 - (IBAction)applyBathroom:(UIButton *)sender {
@@ -360,76 +440,118 @@ To use reverb slider, use:
     
     [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
     
-    //perform convolution Reverb
-    outBuffer = (float**) calloc(channelCount, sizeof(float));
+     //perform convolution Reverb
+     outBuffer = (float**) calloc(channelCount, sizeof(float));
+     float *result;
+     uint32_t outBufferSize;
+     
+     if(sqWaveFlag == 0)
+     {
+     
+     float *temp = &IRBuffer[0][0];
+     
+     float *tt, *bk1, *env, *bk2;
+     
+     tt = (float*) malloc(IRBufferSize*sizeof(float));
+     for(int i = 1; i<=IRBufferSize; i++)
+     {
+     tt[i] = i;                              //tt=1:1:length(bk);
+     }
+     
+     int n = 6;
+     float m = reverbParam.value;
+     printf("\nm = %f\n",m);
+     
+     float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
+     bk1 = (float*) malloc((int)delay*sizeof(float));
+     
+     for(int i = 0; i < (int)delay; i++)
+     {
+     bk1[i] = temp[i];                   //bk1 = bk(1:delay);
+     }
+     
+     env = (float*) malloc(IRBufferSize*sizeof(float));
+     
+     for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
+     {                                       //env = env (1:delay);
+     env[i] = exp(-n*tt[i]/delay);
+     }
+     bk2 = (float*) malloc((int)delay*sizeof(float));
+     vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
+     bk2[0]=0;
+     
+     outBufferSize = inputBufferSize + (int)delay -1;
+     
+     result = (float*) malloc(outBufferSize*sizeof(float));
+     
+     
+     for (int i = 0;i<channelCount;i++)
+     {
+     outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+     }
+     
+     
+     
+     if((int)delay > inputBufferSize)
+     {
+     result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
+     }else
+     {
+     result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
+     }
+     }else
+     {
+     float *temp = &IRBuffer[0][0];
+     
+     float *bkSq, *sqEnv;
+     
+     sqEnv = (float*) malloc(IRBufferSize*sizeof(float));
+     bkSq = (float*) calloc(IRBufferSize, sizeof(float));
+     
+     sqEnv = square(IRBufferSize,1);
+     
+     vDSP_vmul(temp,1,sqEnv,1,bkSq,1,IRBufferSize);
+     
+     
+     outBufferSize = inputBufferSize + IRBufferSize - 1;
+     
+     result = (float*) malloc(outBufferSize*sizeof(float));
+     
+     
+     for (int i = 0;i<channelCount;i++)
+     {
+     outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+     }
+     
+     
+     
+     if(IRBufferSize > inputBufferSize)
+     {
+     result = myConv2(bkSq, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+     }else
+     {
+     result = myConv2(inputBuffer, bkSq, inputBufferSize, IRBufferSize, outBufferSize);
+     }
+     
+     
+     
+     }
+     
+     outBuffer = &result;
+     [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+     
+     [writer writeFloats:outBufferSize fromArray:outBuffer];
+     
+     NSError *error;
+     resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
+     resultAudioPlayer.delegate = self;
+     NSLog(@"%@",error.description);
+     
+     //free(outBuffer);
+     free(IRBuffer);
+     free(result);
+
     
-    
-    uint32_t outBufferSize;
-    float *temp = &IRBuffer[0][0];
-    
-    float *result, *tt, *bk1, *env, *bk2;
-    
-    tt = (float*) malloc(IRBufferSize*sizeof(float));
-    for(int i = 1; i<=IRBufferSize; i++)
-    {
-        tt[i] = i;                              //tt=1:1:length(bk);
-    }
-    
-    int n = 6;
-    float m = reverbParam.value;
-    printf("\nm = %f\n",m);
-    
-    float delay = abs(m*IRBufferSize);              //delay = abs(m*length(bk));
-    bk1 = (float*) malloc((int)delay*sizeof(float));
-    
-    for(int i = 0; i < (int)delay; i++)
-    {
-        bk1[i] = temp[i];                   //bk1 = bk(1:delay);
-    }
-    
-    env = (float*) malloc(IRBufferSize*sizeof(float));
-    
-    for(int i = 0; i < (int)delay; i++)     //env = exp(-n*tt/delay);
-    {                                       //env = env (1:delay);
-        env[i] = exp(-n*tt[i]/delay);
-    }
-    bk2 = (float*) malloc((int)delay*sizeof(float));
-    vDSP_vmul(bk1,1,env,1,bk2,1,(int)delay);    //bk2 = bk1.*env;
-    bk2[0]=0;
-    
-    outBufferSize = inputBufferSize + (int)delay -1;
-    
-    result = (float*) malloc(outBufferSize*sizeof(float));
-    
-    
-    for (int i = 0;i<channelCount;i++)
-    {
-        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
-    }
-    
-    
-    
-    if((int)delay > inputBufferSize)
-    {
-        result = myConv2(bk2, inputBuffer, (int)delay, inputBufferSize, outBufferSize);
-    }else
-    {
-        result = myConv2(inputBuffer, bk2, inputBufferSize, (int)delay, outBufferSize);
-    }
-    
-    outBuffer = &result;
-    [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
-    
-    [writer writeFloats:outBufferSize fromArray:outBuffer];
-    
-    NSError *error;
-	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
-    resultAudioPlayer.delegate = self;
-    NSLog(@"%@",error.description);
-    
-    //free(outBuffer);
-    free(IRBuffer);
-    free(result);
 
     
     
@@ -440,6 +562,8 @@ To use reverb slider, use:
 }
 
 - (IBAction)applySquareWave:(UIButton *)sender {
+    sqWaveFlag = !sqWaveFlag;
+    
 }
 
 

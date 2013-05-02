@@ -331,6 +331,74 @@ float* myConv2(float *signal, float *filter, int lenSignal, int lenFilter, int l
     
 }
 
+float* vinyl(float*signal, uint32_t lenSignal)
+{
+    int curInd = 0;
+    unsigned long newInd;
+    float amp;
+    printf("\nRAND_MAX = %i",RAND_MAX);
+    
+    //add clicks/pops
+    while(curInd < lenSignal-5)
+    {
+        newInd = rand() % 8000;
+        amp = 0.3*rand();
+        amp /= RAND_MAX;
+        curInd = curInd + newInd;
+        for(int i = 0; i < 5; i++)
+        {
+            if(curInd < lenSignal-5)
+                signal[curInd+i] = amp;
+        }
+    }
+
+    float whiteNoise[lenSignal];
+    float amount =  0.01;
+    for(int i=0;i<lenSignal;i++)
+    {
+        whiteNoise[i] = amount*rand();
+        whiteNoise[i] = whiteNoise[i]/RAND_MAX;
+        printf("\nwhiteNoise[%i] = %f",i,whiteNoise[i]);
+    }
+    vDSP_vadd(signal, 1, whiteNoise, 1, signal, 1, lenSignal);
+
+    
+    return signal;
+    
+}
+
+float* square(int lenSignal, float f)
+{       //frequency in Hz
+    float fs = 44100;   //sampling rate
+    float dc = 10;  //duty cycle
+    float *result;
+    result = (float*)calloc(lenSignal, sizeof(float));
+    float temp = fs/dc;
+    
+    for (int i = 0; i < (int)(lenSignal/(44100/f)); i++)
+    {
+        printf("\n%i", i);
+        for(int j = 0;j<temp;j++)
+        {
+            if(i*(int)fs+j <= lenSignal)
+                result[i*(int)fs+j] = 1;
+        }
+        
+        
+    }
+#ifdef DEBUG_PRINT
+    for(int i = 0; i < lenSignal; i++)
+    {
+        printf("\nresult[%i] = %f",i,result[i]);
+        
+    }
+#endif
+
+    return result;
+    
+    
+}
+
 
 
 

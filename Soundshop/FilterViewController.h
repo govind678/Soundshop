@@ -36,6 +36,7 @@
     float **outBuffer;
     float **IRBuffer;
     long IRBufferSize;
+    int sqWaveFlag;
     
 }
 

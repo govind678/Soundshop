@@ -81,6 +81,35 @@
 }
 
 - (IBAction)applyVinyl:(UIButton *)sender {
+    
+    //vinyl effect
+    int outBufferSize = inputBufferSize;
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    float *result;
+    result = (float*)malloc(outBufferSize*sizeof(float));
+    result = vinyl(inputBuffer, inputBufferSize);
+    outBuffer = &result;
+    
+    
+    
+    [writer openFileForWrite:antiqueURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:antiqueURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
+    //free(outBuffer);
+    //free(IRBuffer);
+    free(result);
+    
 }
 
 - (IBAction)returnHome:(UIBarButtonItem *)sender {
