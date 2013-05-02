@@ -18,7 +18,7 @@
 @implementation EQViewController
 
 @synthesize bassSlider, midSlider, trebleSlider, audioPlayer, resultProgress, playPauseButton;
-@synthesize inputBuffer, inputBufferSize, channelCount;
+@synthesize inputBuffer, inputBufferSize, channelCount, inURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +52,14 @@
     
     
     writer = [[EAFWrite alloc]init];
+    
+    
+    /*** By default, play input ***/
+    NSError *error;
+    audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:inURL error:&error];
+    audioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+
 
 }
 

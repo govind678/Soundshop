@@ -22,24 +22,25 @@
     NSURL *outURL;
     
     // IR File URLs
-    NSURL *stairwell1;
-    NSURL *hall1;
-    NSURL *bathroom1;
+    //NSURL *stairwell1;
+    //NSURL *hall1;
+    //NSURL *bathroom1;
     
-    float stairwell1Duration;
-    float hall1Duration;
-    float bathroom1Duration;
+    //float stairwell1Duration;
+    //float hall1Duration;
+    //float bathroom1Duration;
     
     
-    EAFRead *reader;
+    //EAFRead *reader;
     EAFWrite *writer;
     float **outBuffer;
-    float **IRBuffer;
-    long IRBufferSize;
+    //float **IRBuffer;
+    //long IRBufferSize;
     int sqWaveFlag;
     
 }
 
+- (IBAction)reverbFunction:(UISwitch *)sender;
 
 - (IBAction)returnHome:(UIBarButtonItem *)sender;
 
@@ -56,9 +57,6 @@
 - (IBAction)applyHall:(UIButton *)sender;
 - (IBAction)applyBathroom:(UIButton *)sender;
 
-- (IBAction)applyDecay:(UIButton *)sender;
-- (IBAction)applySquareWave:(UIButton *)sender;
-
 
 
 - (void)updatePlayProgress;
@@ -67,6 +65,17 @@
 @property (nonatomic) Float32* inputBuffer;
 @property (nonatomic) uint32_t inputBufferSize;
 @property (nonatomic) int channelCount;
+
+@property (nonatomic) Float32* stairwell1Buffer;
+@property (nonatomic) Float32* hall1Buffer;
+@property (nonatomic) Float32* bathroom1Buffer;
+
+@property (nonatomic) uint32_t stairwell1Size;
+@property (nonatomic) uint32_t hall1Size;
+@property (nonatomic) uint32_t bathroom1Size;
+
+@property (nonatomic) NSURL* inURL;
+
 
 
 @property (weak, nonatomic) IBOutlet UISlider *reverbParam;

@@ -2,7 +2,7 @@
 //  AntiqueViewController.m
 //  Soundshop
 //
-//  Created by Govinda Ram Pingali on 5/1/13.
+//  Created by Govinda Ram Pingali on 5/2/13.
 //  Copyright (c) 2013 GTCMT. All rights reserved.
 //
 
@@ -17,8 +17,9 @@
 
 @implementation AntiqueViewController
 
-@synthesize playAntique, resultProgress;
-@synthesize inputBuffer, inputBufferSize, channelCount;
+@synthesize playAntiqueButton, playProgress;
+@synthesize inputBuffer, inputBufferSize, channelCount, resultAudioPlayer, inURL;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,14 +40,18 @@
     // Setup outURL
     NSArray *dirPaths;
     NSString *docsDir;
-    
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = dirPaths[0];
-    
     NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"result.caf"];
     antiqueURL = [NSURL fileURLWithPath:soundFilePath];
     
     writer = [[EAFWrite alloc]init];
+    
+    /*** By default, play input ***/
+    NSError *error;
+    resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:inURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
 
 }
 
@@ -57,7 +62,6 @@
 }
 
 - (IBAction)applyPhone:(UIButton *)sender {
-    
     //code for phoneFx
     float *result;
     result = (float*) malloc(inputBufferSize*sizeof(float));
@@ -77,11 +81,11 @@
 	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:antiqueURL error:&error];
     resultAudioPlayer.delegate = self;
     NSLog(@"%@",error.description);
-    
 }
 
+
+
 - (IBAction)applyVinyl:(UIButton *)sender {
-    
     //vinyl effect
     int outBufferSize = inputBufferSize;
     outBuffer = (float**) calloc(channelCount, sizeof(float));
@@ -109,58 +113,51 @@
     //free(outBuffer);
     //free(IRBuffer);
     free(result);
-    
 }
 
-- (IBAction)returnHome:(UIBarButtonItem *)sender {
+
+- (IBAction)switchHome:(UIBarButtonItem *)sender {
     [self dismissViewControllerAnimated:YES completion:NO];
 }
 
-- (IBAction)play:(UIBarButtonItem *)sender {
+- (IBAction)playResult:(UIBarButtonItem *)sender {
     if (resultAudioPlayer == nil) {
 		NSLog(@"Error, Nil Audio Player");
     } else {
         if(!resultAudioPlayer.playing) {
             [resultAudioPlayer play];
-            playAntique.title = @"Pause";
+            playAntiqueButton.title = @"Pause";
             NSLog(@"Play");
         } else {
             [resultAudioPlayer pause];
-            playAntique.title = @"Play";
+            playAntiqueButton.title = @"Play";
             NSLog(@"Pause");
         }
     }
 
 }
 
-- (IBAction)rewind:(UIBarButtonItem *)sender {
-    
+- (IBAction)rewindResult:(UIBarButtonItem *)sender {
     [resultAudioPlayer stop];
     [resultAudioPlayer setCurrentTime:0];
-    playAntique.title = @"Play";
+    playAntiqueButton.title = @"Play";
 }
-
-
-
 
 - (void)updateProgress {
     float progress = [resultAudioPlayer currentTime] / [resultAudioPlayer duration];
-    self.resultProgress.progress = progress;
+    self.playProgress.progress = progress;
 }
-
-
 
 //*** AVAudioPlayer Delegate Methods ***//
 
 -(void)audioPlayerDidFinishPlaying: (AVAudioPlayer *)player successfully:(BOOL)flag {
     NSLog(@"Finished Playing");
-    playAntique.title = @"Play";
+    playAntiqueButton.title = @"Play";
 }
 
 -(void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
     NSLog(@"Decode Error occurred");
 }
-
 
 
 @end

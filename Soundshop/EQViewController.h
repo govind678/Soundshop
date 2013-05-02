@@ -41,4 +41,6 @@
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 
+@property (nonatomic) NSURL* inURL;
+
 @end

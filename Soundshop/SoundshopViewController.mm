@@ -44,7 +44,7 @@
     
     NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"sound.caf"];
     
-    NSURL *inURL = [NSURL fileURLWithPath:soundFilePath];
+    inURL = [NSURL fileURLWithPath:soundFilePath];
     
     channelCount = 1;
     
@@ -115,6 +115,32 @@
     
     stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
     hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
+    bathroom1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Bathroom1.caf", [[NSBundle mainBundle] resourcePath]]];
+    
+    
+    //*** Read IR Files into Buffers ***//
+    // Setup IR Buffer Sizes
+    stairwell1Size =  3.430884 * SampleRate;
+    hall1Size = 0.768730 * SampleRate;
+    bathroom1Size = 0.9 * SampleRate; // Must change
+    
+    [reader openFileForRead:stairwell1 sr:SampleRate channels:1];
+    [reader openFileForRead:hall1 sr:SampleRate channels:1];
+    [reader openFileForRead:bathroom1 sr:SampleRate channels:1];
+    
+    stairwell1Buffer = (float **)calloc(channelCount, sizeof(float*));
+    hall1Buffer = (float **)calloc(channelCount, sizeof(float*));
+    bathroom1Buffer = (float **)calloc(channelCount, sizeof(float*));
+    
+    for (int i = 0; i < channelCount; ++i) {
+        stairwell1Buffer[i] = (float*)calloc(stairwell1Size, sizeof(float));
+        hall1Buffer[i] = (float*)calloc(hall1Size, sizeof(float));
+        bathroom1Buffer[i] = (float*)calloc(bathroom1Size, sizeof(float));
+    }
+    
+    [reader readFloatsConsecutive:stairwell1Size intoArray:stairwell1Buffer];
+    [reader readFloatsConsecutive:hall1Size intoArray:hall1Buffer];
+    [reader readFloatsConsecutive:bathroom1Size intoArray:bathroom1Buffer];
     
     
 }
@@ -216,6 +242,13 @@
         viewFilterScreen.inputBuffer = *(inBuffer);
         viewFilterScreen.inputBufferSize = numFrames;
         viewFilterScreen.channelCount = channelCount;
+        viewFilterScreen.stairwell1Buffer = *(stairwell1Buffer);
+        viewFilterScreen.hall1Buffer = *(hall1Buffer);
+        viewFilterScreen.bathroom1Buffer = *(bathroom1Buffer);
+        viewFilterScreen.stairwell1Size = stairwell1Size;
+        viewFilterScreen.hall1Size = hall1Size;
+        viewFilterScreen.bathroom1Size = bathroom1Size;
+        viewFilterScreen.inURL = inURL;
         [self presentViewController:viewFilterScreen animated:YES completion:NO];
     }
     
@@ -228,6 +261,7 @@
         viewAntiqueScreen.inputBuffer = *(inBuffer);
         viewAntiqueScreen.inputBufferSize = numFrames;
         viewAntiqueScreen.channelCount = channelCount;
+        viewAntiqueScreen.inURL = inURL;
         [self presentViewController:viewAntiqueScreen animated:YES completion:NO];
     }
 
@@ -241,6 +275,7 @@
         viewEQScreen.inputBuffer = *(inBuffer);
         viewEQScreen.inputBufferSize = numFrames;
         viewEQScreen.channelCount = channelCount;
+        viewEQScreen.inURL = inURL;
         [self presentViewController:viewEQScreen animated:YES completion:NO];
     }
     

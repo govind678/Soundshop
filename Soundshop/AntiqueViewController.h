@@ -2,7 +2,7 @@
 //  AntiqueViewController.h
 //  Soundshop
 //
-//  Created by Govinda Ram Pingali on 5/1/13.
+//  Created by Govinda Ram Pingali on 5/2/13.
 //  Copyright (c) 2013 GTCMT. All rights reserved.
 //
 
@@ -11,10 +11,7 @@
 #import "EAFWrite.h"
 #include "dsp.h"
 
-
 @interface AntiqueViewController : UIViewController <AVAudioPlayerDelegate> {
-    
-    AVAudioPlayer *resultAudioPlayer;
     
     NSURL *antiqueURL;
     
@@ -24,24 +21,25 @@
 }
 
 - (IBAction)applyPhone:(UIButton *)sender;
-
 - (IBAction)applyVinyl:(UIButton *)sender;
 
+@property AVAudioPlayer *resultAudioPlayer;
 
-- (IBAction)returnHome:(UIBarButtonItem *)sender;
+@property (weak, nonatomic) IBOutlet UIProgressView *playProgress;
+- (IBAction)switchHome:(UIBarButtonItem *)sender;
+- (IBAction)playResult:(UIBarButtonItem *)sender;
+- (IBAction)rewindResult:(UIBarButtonItem *)sender;
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *playAntique;
-- (IBAction)play:(UIBarButtonItem *)sender;
-- (IBAction)rewind:(UIBarButtonItem *)sender;
-
-@property (weak, nonatomic) IBOutlet UIProgressView *resultProgress;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *playAntiqueButton;
 
 - (void) updateProgress;
-
 
 
 @property (nonatomic) Float32* inputBuffer;
 @property (nonatomic) uint32_t inputBufferSize;
 @property (nonatomic) int channelCount;
+
+@property (nonatomic) NSURL* inURL;
+
 
 @end

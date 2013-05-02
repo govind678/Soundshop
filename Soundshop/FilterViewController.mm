@@ -23,14 +23,22 @@
 @implementation FilterViewController
 
 @synthesize playPauseResultButton, resultProgress, inputBuffer, inputBufferSize, channelCount;
-@synthesize resultAudioPlayer, reverbParam;
+@synthesize resultAudioPlayer, reverbParam, inURL;
+@synthesize stairwell1Buffer, hall1Buffer, bathroom1Buffer, stairwell1Size, hall1Size, bathroom1Size;
 
 
 
 /**************************************
-To use reverb slider, use:
-    reverbParam.value
-***************************************/
+ To use reverb slider, use:
+ reverbParam.value
+ 
+ To use the switch between functions to multiply with IR, use:
+ if(reverbFunction.on) {
+ Do e^x thingy;
+ } else {
+ Do square wave thingy;
+ }
+ ***************************************/
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -55,29 +63,26 @@ To use reverb slider, use:
     // Setup outURL
     NSArray *dirPaths;
     NSString *docsDir;
-    
     dirPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     docsDir = dirPaths[0];
-    
-    NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"result.caf"];
-    
+    NSString *soundFilePath = [docsDir stringByAppendingPathComponent:@"reverb.caf"];
     outURL = [NSURL fileURLWithPath:soundFilePath];
 
     
     
     // Create URLs from IR Files
-    stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
-    hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
-    bathroom1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Bathroom1.caf", [[NSBundle mainBundle] resourcePath]]];
+    //stairwell1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Stairwell1.caf", [[NSBundle mainBundle] resourcePath]]];
+    //hall1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Hall1.caf", [[NSBundle mainBundle] resourcePath]]];
+    //bathroom1 = [NSURL fileURLWithPath:[NSString stringWithFormat:@"%@/Bathroom1.caf", [[NSBundle mainBundle] resourcePath]]];
     
     // Setup IR Buffer Sizes
-    stairwell1Duration =  3.430884;
-    hall1Duration = 0.768730;
-    bathroom1Duration = 0.9; // Must change
+    //stairwell1Duration =  3.430884;
+    //hall1Duration = 0.768730;
+    //bathroom1Duration = 0.9; // Must change
     
-    // Setup ExtAudioFile Writer & Reader
+    // Setup ExtAudioFile Writer
     writer = [[EAFWrite alloc]init];
-    reader = [[EAFRead alloc]init];
+    //reader = [[EAFRead alloc]init];
     sqWaveFlag = 0;
     
     
@@ -87,6 +92,13 @@ To use reverb slider, use:
      NSLog(@"currentSample: %f", currentSample);
      }*/
     
+    
+    /*** By default, play input ***/
+    NSError *error;
+    resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:inURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
 }
 
 
@@ -95,6 +107,12 @@ To use reverb slider, use:
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+//** Reverb Toggle **//
+- (IBAction)reverbFunction:(UISwitch *)sender {
+    
 }
 
 
@@ -173,16 +191,17 @@ To use reverb slider, use:
     
     
     // Setup ExtAudioFile Reader
-    float duration = stairwell1Duration;
-    IRBufferSize = duration*SampleRate;
+    //float duration = stairwell1Size;
+    //IRBufferSize = duration*SampleRate;
+    uint32_t IRBufferSize = stairwell1Size;
     
-    [reader openFileForRead:stairwell1 sr:SampleRate channels:1];
+    /*[reader openFileForRead:stairwell1 sr:SampleRate channels:1];
     
     IRBuffer = (float **)calloc(channelCount, sizeof(float*));
     for (int i = 0; i < channelCount; ++i)
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
-    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
+    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];*/
     
     
     
@@ -194,8 +213,8 @@ To use reverb slider, use:
     if(sqWaveFlag == 0)
     {
         
-        float *temp = &IRBuffer[0][0];
-    
+        //float *temp = &IRBuffer[0][0];
+        float * temp = stairwell1Buffer;
         float *tt, *bk1, *env, *bk2;
     
         tt = (float*) malloc(IRBufferSize*sizeof(float));
@@ -247,8 +266,8 @@ To use reverb slider, use:
         }
     }else
     {
-        float *temp = &IRBuffer[0][0];
-        
+        //float *temp = &IRBuffer[0][0];
+        float *temp = stairwell1Buffer;
         float *bkSq, *sqEnv;
         
         sqEnv = (float*) malloc(IRBufferSize*sizeof(float));
@@ -294,7 +313,7 @@ To use reverb slider, use:
     NSLog(@"%@",error.description);
     
     //free(outBuffer);
-    free(IRBuffer);
+    //free(IRBuffer);
     free(result);
 
 }
@@ -303,16 +322,17 @@ To use reverb slider, use:
 - (IBAction)applyHall:(UIButton *)sender {
     
     // Setup ExtAudioFile Reader
-    float duration = hall1Duration;
-    IRBufferSize = duration*SampleRate;
+    //float duration = hall1Duration;
+    //IRBufferSize = duration*SampleRate;
+    uint32_t IRBufferSize = hall1Size;
     
-    [reader openFileForRead:hall1 sr:SampleRate channels:1];
+    /*[reader openFileForRead:hall1 sr:SampleRate channels:1];
     
     IRBuffer = (float **)calloc(channelCount, sizeof(float*));
     for (int i = 0; i < channelCount; ++i)
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
-    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
+    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];*/
     
     //perform convolution Reverb
     outBuffer = (float**) calloc(channelCount, sizeof(float));
@@ -322,8 +342,8 @@ To use reverb slider, use:
     if(sqWaveFlag == 0)
     {
         
-        float *temp = &IRBuffer[0][0];
-        
+        //float *temp = &IRBuffer[0][0];
+        float *temp = hall1Buffer;
         float *tt, *bk1, *env, *bk2;
         
         tt = (float*) malloc(IRBufferSize*sizeof(float));
@@ -375,8 +395,8 @@ To use reverb slider, use:
         }
     }else
     {
-        float *temp = &IRBuffer[0][0];
-        
+        //float *temp = &IRBuffer[0][0];
+        float *temp = hall1Buffer;
         float *bkSq, *sqEnv;
         
         sqEnv = (float*) malloc(IRBufferSize*sizeof(float));
@@ -422,23 +442,24 @@ To use reverb slider, use:
     NSLog(@"%@",error.description);
     
     //free(outBuffer);
-    free(IRBuffer);
+    //free(IRBuffer);
     free(result);}
 
 
 - (IBAction)applyBathroom:(UIButton *)sender {
     
     // Setup ExtAudioFile Reader
-    float duration = bathroom1Duration;
-    IRBufferSize = duration*SampleRate;
-    
-    [reader openFileForRead:bathroom1 sr:SampleRate channels:1];
+    //float duration = bathroom1Duration;
+    //IRBufferSize = duration*SampleRate;
+    uint32_t IRBufferSize = bathroom1Size;
+   
+    /*[reader openFileForRead:bathroom1 sr:SampleRate channels:1];
     
     IRBuffer = (float **)calloc(channelCount, sizeof(float*));
     for (int i = 0; i < channelCount; ++i)
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
-    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
+    [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];*/
     
      //perform convolution Reverb
      outBuffer = (float**) calloc(channelCount, sizeof(float));
@@ -448,7 +469,8 @@ To use reverb slider, use:
      if(sqWaveFlag == 0)
      {
      
-     float *temp = &IRBuffer[0][0];
+     //float *temp = &IRBuffer[0][0];
+    float *temp = bathroom1Buffer;
      
      float *tt, *bk1, *env, *bk2;
      
@@ -501,7 +523,8 @@ To use reverb slider, use:
      }
      }else
      {
-     float *temp = &IRBuffer[0][0];
+     //float *temp = &IRBuffer[0][0];
+    float *temp = bathroom1Buffer;
      
      float *bkSq, *sqEnv;
      
@@ -548,7 +571,7 @@ To use reverb slider, use:
      NSLog(@"%@",error.description);
      
      //free(outBuffer);
-     free(IRBuffer);
+     //free(IRBuffer);
      free(result);
 
     
@@ -556,14 +579,6 @@ To use reverb slider, use:
     
     
 
-}
-
-- (IBAction)applyDecay:(UIButton *)sender {
-}
-
-- (IBAction)applySquareWave:(UIButton *)sender {
-    sqWaveFlag = !sqWaveFlag;
-    
 }
 
 

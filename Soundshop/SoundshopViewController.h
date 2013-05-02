@@ -28,8 +28,18 @@
     long numFrames;
     int channelCount;
     
+    float **stairwell1Buffer;
+    float **hall1Buffer;
+    float **bathroom1Buffer;
+    
+    UInt32 stairwell1Size;
+    UInt32 hall1Size;
+    UInt32 bathroom1Size;
+    
     NSURL *stairwell1;
     NSURL *hall1;
+    NSURL *bathroom1;
+    NSURL *inURL;
     
 }
 
