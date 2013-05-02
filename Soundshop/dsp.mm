@@ -8,6 +8,8 @@
 
 #include "dsp.h"
 
+//#define DEBUG_PRINT
+
 
 float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterLength, uint32_t resultLength)
 {
@@ -33,9 +35,11 @@ float* myConv(float *signal, float* filter, uint32_t lenSignal, uint32_t filterL
     
     vDSP_conv(signal, signalStride, filter + filterLength - 1, filterStride, result, resultStride, resultLength, filterLength);
     
-    //uint32_t i;
-    //for(i=0;i<resultLength;i++)
-    //    printf("\nresult[%i]: %f",i,result[i]);
+#ifdef DEBUG_PRINT
+    uint32_t i;
+    for(i=0;i<resultLength;i++)
+        printf("\nresult[%i]: %f",i,result[i]);
+#endif
     
     //scale ouput from -1 to 1;
     float max;
@@ -193,29 +197,31 @@ float* phoneFx( float* signal, int32_t lenSignal)
     };
     
     
-    float *result, *resultTemp, *temp;
-    int32_t resultLen = lenSignal;
+    float *result, *temp;
+    int32_t resultLen = lenSignal+200;
     
     
     result = (float*) malloc(resultLen*sizeof(float));
-    resultTemp = (float*) malloc(resultLen*sizeof(float));
-    temp = (float*) malloc(resultLen*sizeof(float));
+    //resultTemp = (float*) malloc(resultLen*sizeof(float));
+    temp = (float*) malloc((lenSignal+100)*sizeof(float));
     
     float *lpPtr = &lpCoefs[0];
     float *hpPtr = &hpCoefs[0];
     
-    temp = myConv(signal, lpPtr, lenSignal, lpCoefsLength, resultLen); //lowpass
-    resultTemp = myConv(temp, hpPtr, lenSignal, hpCoefsLength, resultLen); //highpass
+    temp = myConv2(signal, lpPtr, lenSignal, lpCoefsLength, resultLen-100); //lowpass
+    result = myConv2(temp, hpPtr, lenSignal, hpCoefsLength, resultLen); //highpass
+    
     
     int i;
-    float whiteNoise[lenSignal];
+    float whiteNoise[resultLen];
     float amount =  0.01;
-    for(i=0;i<lenSignal;i++)
+    for(i=0;i<resultLen;i++)
     {
         whiteNoise[i] = amount*rand();
+        whiteNoise[i] = whiteNoise[i]/RAND_MAX;
         printf("\nwhiteNoise[%i] = %f",i,whiteNoise[i]);
     }
-    vDSP_vadd(resultTemp, 1, whiteNoise, 1, result, 1, resultLen);
+    vDSP_vadd(result, 1, whiteNoise, 1, result, 1, resultLen);
     
     
     return result;
@@ -274,15 +280,14 @@ float* myConv2(float *signal, float *filter, int lenSignal, int lenFilter, int l
 {
     int i,j;
     float *y;
-    //float factor = 1000.0;
-    //vDSP_vsmul(signal,1,&factor,signal,1,lenSignal);
-    //vDSP_vsmul(filter,1,&factor,filter,1,lenFilter);
     
+#ifdef DEBUG_PRINT
     for(int i = 0; i < lenSignal; i++)
         printf("\nsignal[%i] = %f",i,signal[i]);
     
     for(int i = 0; i < lenFilter; i++)
         printf("\nfilter[%i] = %f",i,filter[i]);
+#endif
     
     y = (float*) malloc(lenResult*sizeof(float));
     
@@ -309,11 +314,14 @@ float* myConv2(float *signal, float *filter, int lenSignal, int lenFilter, int l
     }
     
     
-    //float max;
-    //vDSP_maxmgv(y,1,&max,lenResult);
-    //vDSP_vsdiv(y,1,&max,y,1,lenResult);
+    float max;
+    vDSP_maxmgv(y,1,&max,lenResult);
+    vDSP_vsdiv(y,1,&max,y,1,lenResult);
+    
+#ifdef DEBUG_PRINT
     for(int i = 0; i < lenResult; i++)
         printf("\ny[%i] = %.99g",i,y[i]);
+#endif
     
     
     

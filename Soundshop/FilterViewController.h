@@ -26,9 +26,9 @@
     NSURL *hall1;
     NSURL *bathroom1;
     
-    long stairwell1Duration;
-    long hall1Duration;
-    long bathroom1Duration;
+    float stairwell1Duration;
+    float hall1Duration;
+    float bathroom1Duration;
     
     
     EAFRead *reader;

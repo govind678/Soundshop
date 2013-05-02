@@ -175,13 +175,44 @@
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
     [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
-     
     
+    
+    
+    //perform convolution Reverb
     outBuffer = (float**) calloc(channelCount, sizeof(float));
     
 
     uint32_t outBufferSize;
-    float *result;
+    float *temp = &IRBuffer[0][0];
+    
+    float *result, *tt, *bk1, *env;
+    
+    tt = (float*) malloc(IRBufferSize*sizeof(float));
+    for(int i = 1; i<=IRBufferSize; i++)
+    {
+        tt[i] = i;
+    }
+    
+    int n = 6;
+    float m = 1;
+    
+    float delay = abs(m*IRBufferSize);
+    bk1 = (float*) malloc((int)delay*sizeof(float));
+    
+    for(int i = 0; i < (int)delay; i++)
+    {
+        bk1[i] = temp[i];
+    }
+    
+    env = (float*) malloc(IRBufferSize*sizeof(float));
+    
+    for(int i = 0; i < IRBufferSize; i++)
+    {
+        env[i] = exp(-n*tt[i]/delay);
+    }
+    
+    
+    
     
     
     outBufferSize = inputBufferSize+IRBufferSize-1;
@@ -194,22 +225,6 @@
         outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
     }
     
-    float *temp = &IRBuffer[0][0];
-    //float inp[6] = {0,1,2,3,4,5,};
-   // float filt[6] = {0,1,2,3,4,5};
-    //float res[11];
-    //float *resPtr;
-    //float *sig, *filt, *res;
-    //sig = (float*) malloc(1000*sizeof(float));
-    //filt = (float*) malloc(1000*sizeof(float));
-    //res = (float*) malloc(1999*sizeof(float));
-    //for(int i=0; i< 1000; i++)
-    //{
-     //   sig[i] = i;
-     //   filt[i] = i;
-    //}
-    
-    //res = myConv2(temp,sig,IRBufferSize,1000,1000+IRBufferSize-1);
     
 
     if(IRBufferSize > inputBufferSize)
@@ -230,20 +245,9 @@
     resultAudioPlayer.delegate = self;
     NSLog(@"%@",error.description);
     
-    
-    /*//Log IR Buffer
-     for(int j=0; j<channelCount; j++) {
-     for( int i=0; i<IRBufferSize; i++ ) {
-     float currentSample = IRBuffer[j][i];
-     NSLog(@"sample[%i]: %f", i, currentSample);
-     }
-     }*/
-    
-    /*//Log Input Buffer
-     for( int i=0; i<inputBufferSize; i++ ) {
-     Float32 currentSample = inputBuffer[i];
-     NSLog(@"currentSample: %f", currentSample);
-     } */
+    //free(outBuffer);
+    free(IRBuffer);
+    free(result);
 
 }
 
@@ -262,12 +266,53 @@
     
     [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
     
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    
+    
+    uint32_t outBufferSize;
+    float *result;
+    
+    
+    outBufferSize = inputBufferSize+IRBufferSize-1;
+    
+    result = (float*) malloc(outBufferSize*sizeof(float));
+    
+    
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    
+    float *temp = &IRBuffer[0][0];
+    
+    if(IRBufferSize > inputBufferSize)
+    {
+        result = myConv2(temp, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+    }else
+    {
+        result = myConv2(inputBuffer, temp, inputBufferSize, IRBufferSize, outBufferSize);
+    }
+    
+    outBuffer = &result;
+    [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
+    //free(outBuffer);
+    free(IRBuffer);
+    free(result);
+    
 }
 
 
 - (IBAction)applyBathroom:(UIButton *)sender {
     
-    // Setup ExtAudioFile Reader
+    /*// Setup ExtAudioFile Reader
     float duration = bathroom1Duration;
     IRBufferSize = duration*SampleRate;
     
@@ -278,6 +323,71 @@
         IRBuffer[i] = (float*)calloc(IRBufferSize, sizeof(float));
     
     [reader readFloatsConsecutive:IRBufferSize intoArray:IRBuffer];
+    
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    
+    
+    uint32_t outBufferSize;
+    float *result;
+    
+    
+    outBufferSize = inputBufferSize+IRBufferSize-1;
+    
+    result = (float*) malloc(outBufferSize*sizeof(float));
+    
+    
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    
+    float *temp = &IRBuffer[0][0];
+    
+    if(IRBufferSize > inputBufferSize)
+    {
+        result = myConv2(temp, inputBuffer, IRBufferSize, inputBufferSize, outBufferSize);
+    }else
+    {
+        result = myConv2(inputBuffer, temp, inputBufferSize, IRBufferSize, outBufferSize);
+    }
+    
+    outBuffer = &result;
+    [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+    
+    //free(outBuffer);
+    free(IRBuffer);
+    free(result);*/
+    
+    
+    //code for phoneFx
+    float *result;
+    result = (float*) malloc(inputBufferSize*sizeof(float));
+    outBuffer = (float**) calloc(channelCount, sizeof(float));
+    int outBufferSize = inputBufferSize+200;
+    for (int i = 0;i<channelCount;i++)
+    {
+        outBuffer[i] = (float*) calloc(outBufferSize, sizeof(float));
+    }
+    result = phoneFx(inputBuffer, inputBufferSize);
+    outBuffer = &result;
+    [writer openFileForWrite:outURL sr:SampleRate channels:channelCount wordLength:16 type:kAudioFileCAFType];
+    
+    [writer writeFloats:outBufferSize fromArray:outBuffer];
+    
+    NSError *error;
+	resultAudioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:outURL error:&error];
+    resultAudioPlayer.delegate = self;
+    NSLog(@"%@",error.description);
+
+    
+    
 
 }
 
